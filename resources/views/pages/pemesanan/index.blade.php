@@ -27,10 +27,26 @@
           {{-- Import --}}
           <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a>
 
-          <div class="row">
-            <div class="col-md grid-margin stretch-card">
+          <div class="row g-0">
+            <div class="col-md-8 grid-margin stretch-card">
+              <div class="card tale-bg p-4">
+                {{-- @include('pages.pemesanan.data') --}}
+                {{-- <div class="my-3 ml-md-1 row">
+                  <div class="col-md-7">
+                    <select class="form-control col-sm" name="meja_id" id="meja_id">
+                      <option selected disabled>Pilih Meja</option>
+                      @foreach ($meja as $j => $nama)
+                          <option value="{{ $j }}">{{ $nama }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div> --}}
+                @include('pages.pemesanan.menu')
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
               <div class="card tale-bg py-3 px-3">
-                @include('pages.pemesanan.data')
+                @include('pages.pemesanan.pemesanan')
               </div>
             </div>
           </div>
@@ -43,7 +59,7 @@
       </div>
     <!-- main-panel ends -->
 @endsection
-@include('pages.pemesanan.modal')
+{{-- @include('pages.pemesanan.modal') --}}
 
 
 {{-- Script --}}

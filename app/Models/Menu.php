@@ -14,6 +14,6 @@ class Menu extends Model
     public $guarded = ['id'];
     
     public function jenis(){
-        return $this->belongsTo(Jenis::class);
+        return $this->belongsTo(Jenis::class, 'jenis_id');
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PemesananImport;
+use App\Models\Jenis;
 use App\Models\Meja;
 use Illuminate\Http\Request;
 
@@ -21,10 +22,14 @@ class PemesananController extends Controller
         // $data['pemesanan'] = Pemesanan::get();
         // return view('pages.pemesanan.index')->with($data);
 
-        $pemesanan = Pemesanan::with(['meja'])->latest()->get();
-        $meja = Meja::pluck('no_meja', 'id');
+        // $pemesanan = Pemesanan::with(['meja'])->latest()->get();
 
-        return view('pages.pemesanan.index', compact('pemesanan', 'meja'));
+        $data['jenis'] = Jenis::with(['menu'])->get();
+        // dd($data);
+        // $meja = Meja::pluck('no_meja', 'id');
+
+        // return view('pages.pemesanan.index', compact('pemesanan', 'meja'));
+        return view('pages.pemesanan.index')->with($data);
     }
 
     /**

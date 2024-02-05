@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\StockController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::resource('/meja', MejaController::class);
 Route::resource('/pelanggan', PelangganController::class);
 Route::resource('/pemesanan', PemesananController::class);
 Route::resource('/karyawan', KaryawanController::class);
+
+
