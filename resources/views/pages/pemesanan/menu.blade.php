@@ -19,23 +19,57 @@
 </div> --}}
 
 
-
-@foreach ($jenis as $j)
-  <h3>{{ $j->nama }}</h3>
-  <div class="row row-cols-1 row-cols-md-3 my-2">
-    @foreach ($j->menu as $menu)
-      <div class="col mb-3">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <div class="d-flex items-center justify-content-between">
-              <h5 class="card-title">{{ $menu->nama }}</h5>
-            </div>
-            <p class="card-text">{{ $menu->deskripsi }}</p>
-            <a href="#" class="btn btn-primary">Rp. {{ $menu->harga }}</a>
-          </div>
-        </div>
+<div class="menu-container">
+  @foreach ($jenis as $j)
+    <div class="">
+      <h3>{{ $j->nama }}</h3>
+      <div class="menu-item row row-cols-3 row-cols-md-5">
+        @foreach ($j->menu as $menu)
+            <button type="button" class="menu btn btn-primary" data-id="{{ $menu->id }}" data-harga="{{ $menu->harga }}">{{ $menu->nama }}</button>
+        @endforeach
       </div>
-    @endforeach
-  </div>
-@endforeach
+    </div>
+  @endforeach
+</div>
+
+
+<!-- Contoh elemen HTML dengan atribut data -->
+<div id="myElement" class="element" data-id="123" data-name="John" data-age="25">Halo</div>
+
+
+
+@push('script')
+  <script>
+    $('.element').click(function() {
+      const data = $('#myElement')[0].dataset;
+      console.log(data.id);    // Output: 123
+      console.log(data.name);  // Output: John
+      console.log(data.age);   // Output: 25
+    });
+
+    $(function(){
+      const orderedList = []
+      $('.menu-item button').click(function(){
+        // console.log('halo');
+        const menu_clicked = $(this).text();
+        const data = $(this)[0].dataset;
+        const id = $(this).data('id');
+        const harga = $(this).data('harga');
+        console.log(harga);
+
+        if(orderedList.lengt !== 0 && orderedList.some(list => list.id === id)){
+          let index = orderedList.findIndex(list => list.id === id)
+          orderedList[index].qty += 1;
+        }else {
+          let dataN = {'id' : id, 'menu' : menu_clicked, 'harga' : harga, 'qty' : 1}
+          orderedList.push(dataN);
+        }
+        $('.ordered-list li').remove()
+        orderedList.forEach(function(data){
+          $('.ordered-list').append('<li>' + data.menu + 'Rp. ' + data.harga + 'x ' + data.qty + ' = ' + data.harga * data.qty + '</li>')
+        })
+        // console.log('halo')
+      })
+    })
+  </script>
+@endpush

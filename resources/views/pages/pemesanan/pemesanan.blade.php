@@ -1,5 +1,8 @@
 
 <div class="content p-3">
+    <ul class="ordered-list">
+        
+    </ul>
     <div class="d-flex align-items-center justify-content-between">
         <h4>Price</h4>
         <div class="d-flex justify-content-between">
