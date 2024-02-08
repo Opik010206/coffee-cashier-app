@@ -31,10 +31,10 @@ class StorePelangganRequest extends FormRequest
     public function messages()
     {
         return [
-            'nama.required' => 'Data nama pelanggan',
-            'email.required' => 'Data email pelanggan',
-            'no_telp.required' => 'Data no_telp pelanggan',
-            'alamat.required' => 'Data alamat pelanggan',
+            'nama.required' => 'nama',
+            'email.required' => 'email',
+            'no_telp.required' => 'no_telp',
+            'alamat.required' => 'alamat',
         ];
     }
 }

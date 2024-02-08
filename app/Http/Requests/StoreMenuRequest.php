@@ -25,18 +25,18 @@ class StoreMenuRequest extends FormRequest
             'nama' => 'required',
             'jenis_id' => 'required',
             'harga' => 'required',
-            // 'image' => 'required',
+            'image' => 'required|file|mimetypes:image/jpeg,image/png,image/jpg|max:1024',
             'deskripsi' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'nama.required' => 'Data nama menu',
-            'jenis_id.required' => 'Data jenis_id menu',
-            'harga.required' => 'Data harga menu',
-            // 'image.required' => 'Data image menu',
-            'deskripsi.required' => 'Data deskripsi menu',
+            'nama.required' => 'nama',
+            'jenis_id.required' => 'jenis',
+            'harga.required' => 'harga',
+            'image.required' => 'image',
+            'deskripsi.required' => 'deskripsi',
         ];
     }
 }

@@ -40,8 +40,18 @@ class MenuController extends Controller
     
     public function store(StoreMenuRequest $request)
     {
-        Menu::create($request->all());
+        $menu = Menu::create($request->all());
 
+        // Mendapatkan file yang diunggah oleh pengguna
+        $file = $request->file('image');
+
+        // Menyimpan file gambar ke direktori penyimpanan 'menu' dengan nama yang unik
+        $file_name = $file->getClientOriginalName(); // Nama file asli
+        $file_path = $file->storeAs('menu', $file_name); // Simpan file dengan nama unik di direktori 'menu'
+
+        // Simpan nama file ke dalam kolom image di database
+        $menu->image = $file_path;
+        $menu->save();
 
         return redirect('menu')->with('success', 'Data menu berhasil ditambahkan');
     }

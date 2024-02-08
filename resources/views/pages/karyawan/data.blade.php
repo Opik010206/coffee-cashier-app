@@ -18,7 +18,7 @@
                 <td>{{ $c->jenis_kelamin }}</td>
                 <td>{{ $c->no_telp }}</td>
                 <td>{{ $c->alamat }}</td>
-                <td>{{ $c->foto }}</td>
+                <td><img src="{{ asset('storage/' . $c->foto) }}" class="bg-primary" alt="menu foto" style="width: 60px; height: 60px;"></td>
                 <td class="d-flex">
                     {{-- Edit --}}
                     <button type="button" class="btn btn-success mx-2 " data-toggle="modal" data-target="#modal" data-mode="edit" data-id="{{ $c->id }}" data-nama="{{ $c->nama }}" data-jenis_kelamin="{{ $c->jenis_kelamin }}" data-no_telp="{{ $c->no_telp }}" data-alamat="{{ $c->alamat }}" data-foto="{{ $c->foto }}">

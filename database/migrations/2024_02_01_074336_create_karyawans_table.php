@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('status_nikah', ['belum_nikah','nikah']);
             $table->text('alamat');
             // $table->unsignedBigInteger('golongan_id');
-            $table->string('foto', 150);
+            $table->string('foto', 150)->nullable();
             $table->timestamps();
         });
     }

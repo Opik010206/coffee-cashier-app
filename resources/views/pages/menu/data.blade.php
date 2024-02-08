@@ -6,7 +6,6 @@
         <th scope="col">Jenis</th>
         <th scope="col">Harga</th>
         <th scope="col">Image</th>
-        <th scope="col">Deskripsi</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -17,8 +16,7 @@
                 <td>{{ $c->nama }}</td>
                 <td>{{ $c->jenis->nama }}</td>
                 <td>{{ $c->harga }}</td>
-                <td>{{ $c->image }}</td>
-                <td>{{ $c->deskripsi }}</td>
+                <td><img src="{{ asset('storage/' . $c->image) }}" class="bg-primary" alt="menu image" style="width: 60px; height: 60px;"></td>
                 <td class="d-flex">
                     {{-- Edit --}}
                     <button type="button" class="btn btn-success mx-2 " data-toggle="modal" data-target="#modal" data-mode="edit" data-id="{{ $c->id }}" data-nama="{{ $c->nama }}" data-harga="{{ $c->harga }}" data-image="{{ $c->image }}" data-deskripsi="{{ $c->deskripsi }}">

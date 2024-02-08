@@ -1,4 +1,4 @@
-<table class="table table-responsive">
+<table class="table table-responsive-md">
     <thead>
       <tr>
         <th scope="col">ID</th>

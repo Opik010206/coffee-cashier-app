@@ -33,24 +33,24 @@ class StoreKaryawanRequest extends FormRequest
             'status_nikah' => 'required',
             'alamat' => 'required',
             // 'golongan_id' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|file|mimetypes:image/jpeg,image/png,image/jpg|max:1024',
         ];
     }
     public function messages()
     {
         return [
-            'nip.required' => 'Data nip karyawan',
-            'nik.required' => 'Data nik karyawan',
-            'nama.required' => 'Data tanggal karyawan',
-            'jenis_kelamin.required' => 'Data jenis_kelamin karyawan',
-            'tempat_lahir.required' => 'Data tempat_lahir karyawan',
-            'tanggal_lahir.required' => 'Data tanggal_lahir karyawan',
-            'no_telp.required' => 'Data no_telp karyawan',
-            'agama.required' => 'Data agama karyawan',
-            'status_nikah.required' => 'Data status_nikah karyawan',
-            'alamat.required' => 'Data alamat karyawan',
-            'golongan_id.required' => 'Data golongan_id karyawan',
-            'foto.required' => 'Data foto karyawan',
+            'nip.required' => 'nip',
+            'nik.required' => 'nik',
+            'nama.required' => 'tanggal',
+            'jenis_kelamin.required' => 'jenis kelamin',
+            'tempat_lahir.required' => 'tempal lahir',
+            'tanggal_lahir.required' => 'tanggal lahir',
+            'no_telp.required' => 'nomor telepon',
+            'agama.required' => 'agama',
+            'status_nikah.required' => 'status nikah',
+            'alamat.required' => 'alamat',
+            // 'golongan_id.required' => 'golongan',
+            'foto.required' => 'foto',
         ];
     }
 }

@@ -8,7 +8,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="menu" method="POST" class="form">
+        <form action="menu" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <div id="method"></div>
             <div class="modal-body">
@@ -36,10 +36,11 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="image" class="col-sm-3 col-form-label">Image</label>
-                    <div class="col-sm-9">
-                      <input type="file" class="" id="image" name="image">
-                    </div>
+                  <label for="image" class="col-sm-3 col-form-label">Image</label>
+                  <div class="col-sm-9 input-group">
+                    <input type="file" class="form-control" id="image" name="image">
+                    <label class="input-group-text" for="image">Upload</label>
+                  </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="deskripsi" class="col-sm-3 col-form-label">Deskripsi</label>

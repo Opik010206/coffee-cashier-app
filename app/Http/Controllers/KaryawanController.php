@@ -35,8 +35,15 @@ class KaryawanController extends Controller
     
     public function store(StoreKaryawanRequest $request)
     {
-        Karyawan::create($request->all());
+        $karyawan = Karyawan::create($request->all());        
 
+        $file = $request->file('foto');
+
+        $file_name = $file->getClientOriginalName();
+        $file_path = $file->storeAs('karyawan', $file_name);
+
+        $karyawan->foto = $file_path;
+        $karyawan->save();
 
         return redirect('karyawan')->with('success', 'Data karyawan berhasil ditambahkan');
     }
