@@ -82,6 +82,7 @@
                 </div>
                 <div class="mb-3 row">
                   <label for="foto" class="col-sm-3 col-form-label">Foto</label>
+                  <input type="hidden" name="oldImage" id="oldImage">
                   <div class="col-sm-9 input-group">
                     <input type="file" class="form-control" id="foto" name="foto" accept=".jpg,.jpeg,.png">
                     <label class="input-group-text" for="foto">Upload</label>

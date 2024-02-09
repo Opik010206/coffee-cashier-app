@@ -107,12 +107,13 @@
       let agama = button.data('agama');
       let status_nikah = button.data('status_nikah');
       let alamat = button.data('alamat');
-      let foto = button.data('foto');
+      // let foto = button.data('foto');
       let mode = button.data('mode');
       console.log(button.data('mode'));
       // let mode = button.data('mode');
       let modal = $(this);
       if(mode === 'edit'){
+        console.log('edit');
         modal.find('.modal-title').text('Edit Data');
         modal.find('#nama').val(nama);
         modal.find('#nip').val(nip);
@@ -124,7 +125,7 @@
         modal.find('#agama').val(agama);
         modal.find('#status_nikah').val(status_nikah);
         modal.find('#alamat').val(alamat);
-        modal.find('#foto').val(foto);
+        // modal.find('#foto').val(foto);
         let halo = modal.find('.form').attr('action', '{{ url("karyawan") }}/'+id);
         modal.find('#simpan').text('Simpan Perubahan');
         modal.find('#method').html('@method("PATCH")');

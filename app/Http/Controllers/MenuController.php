@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MenuImport;
 use App\Models\Jenis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -79,6 +80,19 @@ class MenuController extends Controller
     {
         $menu->update($request->all());
 
+        if($request->oldImage){
+            Storage::delete($menu->oldImage);
+        }
+
+        // Menyimpan file gambar ke direktori penyimpanan 'menu' dengan nama yang unik
+        $file_name = $request->image->getClientOriginalName(); // Nama file asli
+        $file_path = $request->image->storeAs('menu', $file_name); // Simpan file dengan nama unik di direktori 'menu'
+
+        // Simpan nama file ke dalam kolom image di database
+        $menu->image = $file_path;
+        $menu->save();
+
+
         return redirect('menu')->with('success', 'Data menu berhasil di Edit');
     }
 
@@ -87,6 +101,10 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
+        if($menu->image){
+            Storage::delete($menu->image);
+        }
+
         $menu->delete();
 
         return redirect('menu')->with('success', 'Data menu berhasil dihapus');

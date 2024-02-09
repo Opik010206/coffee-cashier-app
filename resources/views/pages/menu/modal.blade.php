@@ -37,6 +37,7 @@
                 </div>
                 <div class="mb-3 row">
                   <label for="image" class="col-sm-3 col-form-label">Image</label>
+                  <input type="hidden" name="oldImage" id="oldImage">
                   <div class="col-sm-9 input-group">
                     <input type="file" class="form-control" id="image" name="image">
                     <label class="input-group-text" for="image">Upload</label>
