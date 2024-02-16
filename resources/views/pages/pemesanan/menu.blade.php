@@ -19,17 +19,33 @@
 </div> --}}
 
 
-<div class="menu-container">
-  @foreach ($jenis as $j)
-    <div class="">
-      <h3>{{ $j->nama }}</h3>
-      <div class="menu-item row row-cols-3 row-cols-md-5">
-        @foreach ($j->menu as $menu)
-            <button type="button" class="menu btn btn-primary" data-id="{{ $menu->id }}" data-harga="{{ $menu->harga }}">{{ $menu->nama }}</button>
-        @endforeach
-      </div>
+<div class="card tale-bg px-3 pt-3">
+  <div class="content">
+    <div class="d-flex align-items-center justify-content-between">
+      @foreach ($jenis as $j)
+      <a class="btn btn-outline-primary btn-sm">
+        {{ $j->nama }}
+      </a>
+      @endforeach
     </div>
-  @endforeach
+  </div>
+  <div class="menu-item mx-0 my-3 px-2">
+    @foreach ($jenis as $j)
+    <div class="row row-col-4">
+      @foreach ($j->menu as $menu)
+      <div class="col bg-light rounded mx-1 my-2" >
+        <div class="d-flex flex-column align-items-center justify-content-between" style="height: 100%;">
+          <img src="{{ asset('storage/' . $menu->image) }}" class="ms-auto mt-2" alt="" style="width: 80px;">
+          <h5 class="text-center mt-3 menu" data-id="{{ $menu->id }}" data-harga="{{ $menu->harga }}">{{ $menu->nama }}</h5>
+          <p class="text-center">Rp. {{ $menu->harga }}</p>
+        </div>
+        {{-- <div class="menu" data-id="{{ $menu->id }}" data-harga="{{ $menu->harga }}">
+        </div> --}}
+      </div>
+      @endforeach
+    </div>
+    @endforeach
+  </div>
 </div>
 
 
@@ -63,7 +79,7 @@
     $(function(){
       const orderedList = []
       
-      $('.menu-item button').click(function(){
+      $('.menu-item .row .col .menu').click(function(){
         // console.log('halo');
         const menu_clicked = $(this).text();
         const data = $(this)[0].dataset;
@@ -89,10 +105,6 @@
           )
         })
         // console.log('halo')
-      })
-
-      orderedList.forEach(function(data){
-        
       })
     })
   </script>

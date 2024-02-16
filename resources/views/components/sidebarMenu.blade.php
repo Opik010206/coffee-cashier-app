@@ -54,6 +54,32 @@
           <span class="menu-title">Pemesanan</span>
         </a>
       </li>
+      {{-- <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-secound" aria-expanded="true" aria-controls="ui-secound">
+          <i class="icon-layout menu-icon"></i>
+          <span class="menu-title">Pemesanan</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse show" id="ui-secound" style="">
+          <ul class="nav flex-column sub-menu">
+            @foreach ($jenis as $j)
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="true" aria-controls="ui-basic">
+                  <span class="menu-title">{{ $j->nama }}</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse show" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                    <li>halo</li>
+                    <li>halo</li>
+                    <li>halo</li>
+                  </ul>
+                </div>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="/karyawan">
           <i class="icon-grid menu-icon"></i>

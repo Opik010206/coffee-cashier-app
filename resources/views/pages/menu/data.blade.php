@@ -16,7 +16,7 @@
                 <td>{{ $c->nama }}</td>
                 <td>{{ $c->jenis->nama }}</td>
                 <td>{{ $c->harga }}</td>
-                <td><img src="{{ asset('storage/' . $c->image) }}" class="bg-primary" alt="menu image" style="width: 60px; height: 60px;"></td>
+                <td><img src="{{ asset('storage/' . $c->image) }}" class="" alt="menu image" style="width: 60px; height: 60px;"></td>
                 <td class="d-flex">
                     {{-- Edit --}}
                     <button type="button" class="btn btn-success mx-2 " data-toggle="modal" data-target="#modal" data-mode="edit" data-id="{{ $c->id }}" data-nama="{{ $c->nama }}" data-harga="{{ $c->harga }}" data-image="{{ $c->image }}" data-deskripsi="{{ $c->deskripsi }}">

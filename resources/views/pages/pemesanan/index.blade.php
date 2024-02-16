@@ -3,30 +3,18 @@
 {{-- Style --}}
 @push('style')
     <style>
-      .menu-container{
-        list-style-type: none;
-      }
-      .menu-container li{
-        margin-bottom: 20px;
-      }
-      .menu-container li h3{
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 18px;
-        background-color: aliceblue;
-        padding: 5px 15px;
-        /* margin-bottom: 10px; */
-      }
-      .menu-item{
+      /* .menu-item{
         list-style-type: none;
         display: flex;
         gap: 1em;
         margin: 10px 20px;
-      }
-      .menu-item li{
-        background-color: beige;
-        padding: 10px 20px;
-
+      } */
+      .menu-item h5.menu::after{
+        content: '';
+        position: absolute;
+        /* background: #000; */
+        cursor: pointer;
+        top: 0; right: 0; bottom: 0; left: 0;
       }
     </style>
 @endpush
@@ -53,25 +41,12 @@
           {{-- Import --}}
           {{-- <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a> --}}
 
-          <div class="row g-0">
+          <div class="row">
             <div class="col-md-8 grid-margin stretch-card">
-              <div class="card tale-bg p-4">
-                {{-- @include('pages.pemesanan.data') --}}
-                {{-- <div class="my-3 ml-md-1 row">
-                  <div class="col-md-7">
-                    <select class="form-control col-sm" name="meja_id" id="meja_id">
-                      <option selected disabled>Pilih Meja</option>
-                      @foreach ($meja as $j => $nama)
-                          <option value="{{ $j }}">{{ $nama }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div> --}}
-                @include('pages.pemesanan.menu')
-              </div>
+              @include('pages.pemesanan.menu')
             </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card tale-bg py-3 px-3">
+            <div class="col-md-4 grid-margin stretch-card" style="height: max-content">
+              <div class="card tale-bg px-3 pt-3">
                 @include('pages.pemesanan.pemesanan')
               </div>
             </div>
