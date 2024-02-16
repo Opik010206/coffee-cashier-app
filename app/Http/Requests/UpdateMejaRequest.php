@@ -30,9 +30,9 @@ class UpdateMejaRequest extends FormRequest
     public function messages()
     {
         return [
-            'no_meja.required' => 'Data no_meja meja',
-            'kapasitas.required' => 'Data kapasitas meja',
-            'status.required' => 'Data status meja',
+            'no_meja.required' => 'nomor meja',
+            'kapasitas.required' => 'kapasitas',
+            'status.required' => 'status',
         ];
     }
 }

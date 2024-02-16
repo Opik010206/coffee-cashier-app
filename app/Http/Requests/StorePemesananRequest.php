@@ -33,12 +33,12 @@ class StorePemesananRequest extends FormRequest
     public function messages()
     {
         return [
-            'meja_id.required' => 'Data nomor meja pemesanan',
-            'tanggal_pemesanan.required' => 'Data tanggal pemesanan',
-            'jam_mulai.required' => 'Data jam_mulai pemesanan',
-            'jam_selesai.required' => 'Data jam_selesai pemesanan',
-            'nama_pemesan.required' => 'Data nama_pemesan pemesanan',
-            'jumlah_pelanggan.required' => 'Data jumlah_pelanggan pemesanan',
+            'meja_id.required' => 'nomor meja',
+            'tanggal_pemesanan.required' => 'tanggal',
+            'jam_mulai.required' => 'jam mulai',
+            'jam_selesai.required' => 'jam selesai',
+            'nama_pemesan.required' => 'nama pemesan',
+            'jumlah_pelanggan.required' => 'jumlah pelanggan',
         ];
     }
 }

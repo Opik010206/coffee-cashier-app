@@ -23,14 +23,14 @@ class UpdateJenisRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            // 'ketegory_id' => 'required',
+            'ketegory_id' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'nama.required' => 'Data nama jenis',
-            // 'kategory_id.required' => 'Data kategory_id jenis',
+            'nama.required' => 'nama',
+            'kategory_id.required' => 'kategori',
         ];
     }
 }

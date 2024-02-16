@@ -29,8 +29,8 @@ class UpdateStockRequest extends FormRequest
     public function messages()
     {
         return [
-            'menu_id.required' => 'Data menu_id stok',
-            'jumlah.required' => 'Data jumlah stok',
+            'menu_id.required' => 'menu',
+            'jumlah.required' => 'jumlah',
         ];
     }
 }

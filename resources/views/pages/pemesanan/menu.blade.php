@@ -34,28 +34,41 @@
 
 
 <!-- Contoh elemen HTML dengan atribut data -->
-<div id="myElement" class="element" data-id="123" data-name="John" data-age="25">Halo</div>
-
+{{-- <div id="myElement" class="element" data-id="123" data-name="John" data-age="25">Halo</div>
+<div class="id">Id : </div>
+<div class="name">Name : </div>
+<div class="age">Age : </div> --}}
 
 
 @push('script')
   <script>
-    $('.element').click(function() {
-      const data = $('#myElement')[0].dataset;
-      console.log(data.id);    // Output: 123
-      console.log(data.name);  // Output: John
-      console.log(data.age);   // Output: 25
-    });
+    // let tagId = $('.id');
+    // let tagName = $('.name');
+    // let tagAge = $('.age');
+    // $('.element').click(function() {
+    //   const data = $('#myElement')[0].dataset;
+    //   const id = data.id;
+    //   const name = data.name;
+    //   const age = data.age;
+
+    //   tagId.append(id);
+    //   tagName.append(name);
+    //   tagAge.append(age);
+
+    //   console.log(data.id);    // Output: 123
+    //   console.log(data.name);  // Output: John
+    //   console.log(data.age);   // Output: 25
+    // });
 
     $(function(){
       const orderedList = []
+      
       $('.menu-item button').click(function(){
         // console.log('halo');
         const menu_clicked = $(this).text();
         const data = $(this)[0].dataset;
         const id = $(this).data('id');
         const harga = $(this).data('harga');
-        console.log(harga);
 
         if(orderedList.lengt !== 0 && orderedList.some(list => list.id === id)){
           let index = orderedList.findIndex(list => list.id === id)
@@ -64,11 +77,22 @@
           let dataN = {'id' : id, 'menu' : menu_clicked, 'harga' : harga, 'qty' : 1}
           orderedList.push(dataN);
         }
-        $('.ordered-list li').remove()
+        $('.ordered-list .list-menu').remove()
+        // $('.ordered-list .total').remove()
         orderedList.forEach(function(data){
-          $('.ordered-list').append('<li>' + data.menu + 'Rp. ' + data.harga + 'x ' + data.qty + ' = ' + data.harga * data.qty + '</li>')
+          $('.ordered-list').append(
+            '<div class="d-flex align-items-center justify-content-between list-menu">' + 
+              '<p>' + data.menu + '</p>' + 
+              '<p> Rp. ' + data.harga * data.qty + '</p>' +
+            '</div>'
+            // '<p>' + data.menu + ' Rp. ' + data.harga * data.qty + '</p>'
+          )
         })
         // console.log('halo')
+      })
+
+      orderedList.forEach(function(data){
+        
       })
     })
   </script>

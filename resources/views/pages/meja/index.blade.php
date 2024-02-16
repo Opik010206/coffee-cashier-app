@@ -20,6 +20,30 @@
               </div>
             </div>
           </div>
+
+          @if (session('success'))
+            <div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Selamat!</strong> {{ session('success') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+
+          @if ($errors->any())
+            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+              <ul>
+                @foreach ($errors->all() as $error)
+                    <li>Data {{ $error }} meja belum di isi</li>
+                @endforeach
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>  
+          @endif
+
           <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal">Tambah Data</a>
 
           {{-- Export --}}

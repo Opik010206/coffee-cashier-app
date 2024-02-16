@@ -28,7 +28,7 @@ class StoreCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'nama.required' => 'Data nama category' 
+            'nama.required' => 'nama' 
         ];
     }
 }
