@@ -57,7 +57,11 @@ class PemesananController extends Controller
      */
     public function show(Pemesanan $pemesanan)
     {
-        //
+        return view('pages.pemesanan.index', [
+            'pemesanan' => $pemesanan,
+            'jenis' => $pemesanan->jenis
+            
+        ]);
     }
 
     /**
@@ -65,7 +69,7 @@ class PemesananController extends Controller
      */
     public function edit(Pemesanan $pemesanan)
     {
-        //
+        
     }
 
     /**
