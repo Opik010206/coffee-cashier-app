@@ -42,7 +42,7 @@
           {{-- <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a> --}}
 
           <div class="row">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-8 grid-margin stretch-card" style="height: max-content">
               @include('pages.pemesanan.menu')
             </div>
             <div class="col-md-4 grid-margin stretch-card" style="height: max-content">

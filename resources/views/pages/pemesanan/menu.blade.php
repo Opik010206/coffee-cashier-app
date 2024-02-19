@@ -114,6 +114,54 @@
       const orderedList = [];
       const total = 0;
 
+      const sum = () => {
+        return orderedList.reduce((accumulator, object) => {
+          return accumulator + (object.harga * object.qty);
+        }, 0)
+      };
+
+      const changeQty = (el, inc) => {
+        const id = $(el).closest('.li')[0].dataset.id;
+        // console.log(id);
+        const index = orderedList.findIndex(list => list.id == id)
+        orderedList[index].qty += orderedList[index].qty == 1 && inc == -1 ? 0 : inc
+
+        const txt_subtotal = $(el).closest('.li').find('.subtotal')[0];
+        const txt_qty = $(el).closest('.li').find('.qty-item')[0];
+        txt_qty.value = parseInt(txt_qty.value) == 1 && inc == -1 ? 1 : parseInt(txt_qty.value) + inc;
+        txt_subtotal.innerHTML = orderedList[index].harga * orderedList[index].qty;
+
+        $('#total').html(sum());
+      }
+
+      $('.ordered-list').on('click', '.btn-dec', function(){changeQty(this, -1)})
+      $('.ordered-list').on('click', '.btn-inc', function(){changeQty(this, 1)})
+      
+      $('.ordered-list').on('click', '.remove-item', function(){
+        const item = $(this).closest('.li')[0];
+        let index = orderedList.findIndex(list => list.id == parseInt(item.dataset.id));
+        orderedList.splice(index, 1);
+        $(item).remove();
+        $('#total').html(sum());
+      });
+
+      $('#btn-bayar').on('click', function(){
+        $.ajax({
+          url: "{{ route('pemesanan.store') }}",
+          method: "POST",
+
+          data: {
+            "_token": "{{ csrf_token() }}",
+            orderedList: orderedList,
+            total: total
+          },
+
+          success: function(data){
+            console.log(data)
+          }
+        })
+      })
+
       $('.menu-item').click(function(){ 
         // const menu_clicked = $(this).text();
         const data = $(this)[0].dataset;
@@ -126,19 +174,20 @@
           let dataNan = {'id': id, 'nama': nama, 'harga': harga, 'qty': 1}
           orderedList.push(dataNan);
           let listOrder = `
-          <div class="col mb-3" data-id="${id}">
-            <div class="d-flex align-items-center justify-content-between card" style="border-left: 10px solid orange;">
-                <div class="d-flex align-items-center justify-content-between">
-                    <h3 class="mt-1">${nama}</h3>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button class="btn">-</button>
-                        <input type="number" class="qty-item" value="1" style="width: 30px; border: none" readonly>
-                        <button class="btn btn-inc">+</button>
-                    </div>
-                    <p class="subtotal">${harga * 1}</p>
-                </div> 
+            <div class="col mb-3 px-2 li" data-id="${id}">
+              <div class="d-flex align-items-center justify-content-between card py-2 rounded" style="border-left: 10px solid orange;">
+                  <h4 class="mt-1">${nama}</h4>
+                  <div class="d-flex align-items-center justify-content-between">
+                      <h5 class="mt-2 mr-3">Rp. <span class="subtotal">${harga * 1}</span></h5>
+                      <div class="d-flex align-items-center justify-content-center">
+                          <button class="btn btn-dec mr-4 bg-warning p-1"><i class="ti-minus"></i></button>
+                          <input type="number" class="qty-item" value="1" style="width: 35px; border: none; font-size: 1.1rem" readonly>
+                          <button class="btn btn-inc bg-warning p-1"><i class="ti-plus"></i></button>
+                          <button class="btn remove-item bg-danger text-light p-2 ml-3"><i class="ti-trash"></i></button>
+                      </div>
+                  </div> 
+              </div>
             </div>
-          </div>
           `;
           $('.ordered-list').append(listOrder);
           // console.log(orderedList)
