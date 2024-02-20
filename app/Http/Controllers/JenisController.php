@@ -19,7 +19,8 @@ class JenisController extends Controller
     public function index()
     {
         // $data['jenis'] = Jenis::get();
-        $jenis = Jenis::with(['kategory'])->latest()->get();
+        $jenis = Jenis::with(['kategory', 'menu'])->latest()->get();
+        dd($jenis);
         $category = Category::pluck('nama', 'id');
         // dd($jenis);
 
@@ -49,9 +50,15 @@ class JenisController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jenis $jenis)
+    public function show(Jenis $jeni)
     {
-        //
+        $jenis = Jenis::with(['kategory', 'menu'])->latest()->get();
+
+        return view('pages.pemesanan.index', [
+            'jenis' => $jenis,
+            'menus' => $jeni->menu
+            
+        ]);
     }
 
     /**

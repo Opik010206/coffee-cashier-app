@@ -8,7 +8,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">
-          <i class="icon-grid menu-icon"></i>
+          <i class="icon-grid menu-icon "></i>
           <span class="menu-title">About</span>
         </a>
       </li>

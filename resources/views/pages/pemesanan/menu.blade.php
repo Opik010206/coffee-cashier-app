@@ -1,39 +1,22 @@
-{{-- <div class="row row-cols-1 row-cols-md-3">
-  @foreach ($jenis as $j)    
-    <div class="col mb-3">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex items-center justify-content-between">
-            <h5 class="card-title">{{ $j->nama }}</h5>
-            @foreach ($j->menu as $menu)  
-              <h6 class="text-primary">{{ $menu->nama }}</h6>
-            @endforeach
-          </div>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  @endforeach
-</div> --}}
-
-
 <div class="card tale-bg px-3 pt-3">
   <div class="content">
     <div class="d-flex align-items-center justify-content-between">
+      <a href="/pemesanan" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('/pemesanan') ? 'active' : '' }}">All</a>
       @foreach ($jenis as $j)
-      <a href="/pemesanan/jenis/{{ $j->id }}" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('/pemesanan/jenis/'. $j->id) ? 'active' : '' }}">
-        {{ $j->nama }}
-      </a>
+        <a href="/jenis/{{ $j->id }}" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('jenis/'. $j->id) ? 'active' : '' }}">
+          {{ $j->nama }}
+        </a>
+        {{-- <button class="btn btn-outline-primary btn-sm nav-link btn-jenis" data-id="{{ $j->id }}" data-nama="{{ $j->nama }}">
+          {{ $j->nama }}
+        </button> --}}
       @endforeach
     </div>
   </div>
   <div class=" mx-0 my-3 px-3">
-    @foreach ($jenis as $j)
     <div class="row row-col-4">
-      @foreach ($j->menu as $menu)
-      <div class="col bg-light rounded mx-1 my-2 menu-item" data-id="{{ $menu->id }}" data-nama="{{ $menu->nama }}" data-harga="{{ $menu->harga }}">
+    {{-- @foreach ($jenis as $j) --}}
+    @foreach ($menus as $menu)
+      <div class="col bg-light rounded mx-1 my-2 menu-item" data-id="{{ $menu->id }}" data-nama="{{ $menu->nama }}" data-harga="{{ $menu->harga }}" data-jenis_id="{{ $menu->jenis_id }}">
         <div class="d-flex flex-column align-items-center justify-content-between" style="height: 100%;">
           <img src="{{ asset('storage/' . $menu->image) }}" class="ms-auto mt-2" alt="" style="width: 80px;">
           <h5 class="text-center mt-3 menu">{{ $menu->nama }}</h5>
@@ -43,8 +26,8 @@
         </div> --}}
       </div>
       @endforeach
+    {{-- @endforeach --}}
     </div>
-    @endforeach
   </div>
 </div>
 
@@ -110,6 +93,19 @@
     //   })
     // })
 
+    // Fungsi Jenis
+    $(function(){
+      $('.btn-jenis').click(function(){
+        const id = $(this).data('id');
+        const nama = $(this).data('nama');
+        const menu_id = $('.menu-item')[
+          $(this).data('id')
+        ];
+        console.log(menu_id);
+      })
+    })
+
+    // Fungsi menu
     $(function(){
       const orderedList = [];
       const total = 0;
@@ -146,21 +142,22 @@
       });
 
       $('#btn-bayar').on('click', function(){
+        // console.log('broo')
         $.ajax({
-          url: "{{ route('pemesanan.store') }}",
+          url: "{{ route('transaksi.store') }}",
           method: "POST",
 
           data: {
             "_token": "{{ csrf_token() }}",
             orderedList: orderedList,
-            total: total
+            total: sum()
           },
 
           success: function(data){
             console.log(data)
           }
-        })
-      })
+        });
+      });
 
       $('.menu-item').click(function(){ 
         // const menu_clicked = $(this).text();

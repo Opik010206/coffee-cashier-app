@@ -22,23 +22,23 @@ class StorePemesananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'meja_id' => 'required',
-            'tanggal_pemesanan' => 'required',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
-            'nama_pemesan' => 'required',
-            'jumlah_pelanggan' => 'required',
+            // 'meja_id' => 'required',
+            // 'tanggal_pemesanan' => 'required',
+            // 'jam_mulai' => 'required',
+            // 'jam_selesai' => 'required',
+            // 'nama_pemesan' => 'required',
+            // 'jumlah_pelanggan' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'meja_id.required' => 'nomor meja',
-            'tanggal_pemesanan.required' => 'tanggal',
-            'jam_mulai.required' => 'jam mulai',
-            'jam_selesai.required' => 'jam selesai',
-            'nama_pemesan.required' => 'nama pemesan',
-            'jumlah_pelanggan.required' => 'jumlah pelanggan',
+            // 'meja_id.required' => 'nomor meja',
+            // 'tanggal_pemesanan.required' => 'tanggal',
+            // 'jam_mulai.required' => 'jam mulai',
+            // 'jam_selesai.required' => 'jam selesai',
+            // 'nama_pemesan.required' => 'nama pemesan',
+            // 'jumlah_pelanggan.required' => 'jumlah pelanggan',
         ];
     }
 }

@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PemesananImport;
 use App\Models\Jenis;
 use App\Models\Meja;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -19,17 +20,14 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        // $data['pemesanan'] = Pemesanan::get();
-        // return view('pages.pemesanan.index')->with($data);
+        $jenis = Jenis::with(['menu'])->latest()->get();
+        $menu = Menu::with(['jenis'])->latest()->get();
+        // dd($jenis);
 
-        // $pemesanan = Pemesanan::with(['meja'])->latest()->get();
-
-        $data['jenis'] = Jenis::with(['menu'])->get();
-        // dd($data);
-        // $meja = Meja::pluck('no_meja', 'id');
-
-        // return view('pages.pemesanan.index', compact('pemesanan', 'meja'));
-        return view('pages.pemesanan.index')->with($data);
+        return view('pages.pemesanan.index', compact('jenis', 'menu'), [
+            'menus' => $menu,
+            'jenis' => $jenis
+        ]);
     }
 
     /**
@@ -46,6 +44,7 @@ class PemesananController extends Controller
     
     public function store(StorePemesananRequest $request)
     {
+        // dd($request);
         Pemesanan::create($request->all());
 
 
@@ -57,11 +56,11 @@ class PemesananController extends Controller
      */
     public function show(Pemesanan $pemesanan)
     {
-        return view('pages.pemesanan.index', [
-            'pemesanan' => $pemesanan,
-            'jenis' => $pemesanan->jenis
+        // return view('pages.pemesanan.index', [
+        //     'pemesanan' => $pemesanan,
+        //     'jenis' => $pemesanan->jenis
             
-        ]);
+        // ]);
     }
 
     /**
