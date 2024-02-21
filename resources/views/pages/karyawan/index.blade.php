@@ -53,7 +53,7 @@
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
-              <div class="card tale-bg py-3 px-3">
+              <div class="card py-3 px-3">
                 @include('pages.karyawan.data')
               </div>
             </div>

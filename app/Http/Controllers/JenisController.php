@@ -20,7 +20,7 @@ class JenisController extends Controller
     {
         // $data['jenis'] = Jenis::get();
         $jenis = Jenis::with(['kategory', 'menu'])->latest()->get();
-        dd($jenis);
+        // dd($jenis);
         $category = Category::pluck('nama', 'id');
         // dd($jenis);
 
