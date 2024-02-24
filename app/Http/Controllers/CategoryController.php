@@ -77,10 +77,11 @@ class CategoryController extends Controller
         return redirect('category')->with('success', 'Data category berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new CategoryExport, 'category.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new CategoryExport, $date.'_category.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');

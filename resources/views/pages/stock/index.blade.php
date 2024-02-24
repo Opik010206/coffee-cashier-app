@@ -53,7 +53,7 @@
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
-              <div class="card py-3 px-3">
+              <div class="card p-4">
                 @include('pages.stock.data')
               </div>
             </div>
@@ -74,6 +74,10 @@
 @push('script')
   <script>
     console.log('bro apakabar')
+
+    $(function(){
+      $('#tbl-stock').DataTable()
+    })
 
     // dialog hapus data Sweet Alert
     $('.btn-delete').on('click', function(e){

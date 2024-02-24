@@ -47,13 +47,13 @@
           <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal">Tambah Data</a>
 
           {{-- Export --}}
-          <a href="#" class="btn btn-success mb-3">Export Excel</a>
+          <a href="/category/export/excel" class="btn btn-success mb-3">Export Excel</a>
           {{-- Import --}}
           <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a>
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
-              <div class="card py-3 px-3">
+              <div class="card p-4">
                 @include('pages.category.data')
               </div>
             </div>
@@ -74,6 +74,10 @@
 @push('script')
   <script>
     console.log('bro apakabar')
+
+    $(function(){
+      $('#tbl-category').DataTable()
+    })
 
     // dialog hapus data Sweet Alert
     $('.btn-delete').on('click', function(e){

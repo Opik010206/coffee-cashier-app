@@ -27,7 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'dashboard']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::resource('/category', CategoryController::class);
+Route::get('/category/export/excel', [CategoryController::class, 'export']);
+
 Route::resource('/menu', MenuController::class);
+Route::get('/menu/export/excel', [MenuController::class, 'export']);
+
 Route::resource('/stock', StockController::class);
 Route::resource('/jenis', JenisController::class);
 Route::resource('/meja', MejaController::class);

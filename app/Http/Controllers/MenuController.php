@@ -110,10 +110,11 @@ class MenuController extends Controller
         return redirect('menu')->with('success', 'Data menu berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new menuExport, 'menu.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y-s');
+        return Excel::download(new MenuExport, $date. '_Menu.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');
