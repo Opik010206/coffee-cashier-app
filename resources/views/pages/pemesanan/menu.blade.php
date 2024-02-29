@@ -1,9 +1,9 @@
 <div class="card tale-bg px-3 pt-3">
   <div class="content">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="row align-items-center justify-content-between px-4">
       <a href="/pemesanan" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('/pemesanan') ? 'active' : '' }}">All</a>
       @foreach ($jenis as $j)
-        <a href="/jenis/{{ $j->id }}" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('jenis/'. $j->id) ? 'active' : '' }}">
+        <a href="/jenis/{{ $j->id }}" class="btn btn-outline-primary btn-sm nav-link mt-2{{ Request::is('jenis/'. $j->id) ? 'active' : '' }}">
           {{ $j->nama }}
         </a>
 
@@ -128,7 +128,7 @@
       const changeQty = (el, inc) => {
         const id = $(el).closest('.li')[0].dataset.id;
         // console.log(id);
-        const index = orderedList.findIndex(list => list.id == id)
+        const index = orderedList.findIndex(list => list.menu_id == id)
         orderedList[index].qty += orderedList[index].qty == 1 && inc == -1 ? 0 : inc
 
         const txt_subtotal = $(el).closest('.li').find('.subtotal')[0];
@@ -164,6 +164,24 @@
 
           success: function(data){
             console.log(data)
+            Swal.fire({
+              title: data.message,
+              showDenyButton: true,
+              confirmButtonText: 'Cetak Nota',
+              denyButtonText: `Ok`
+            }).then((result) => {
+              if(result.isConfirmed) {
+                window.open("{{ url('nota/232323') }}")
+                location.reload()
+              }else if (result.isDenied) {
+                location.reload()
+              }
+            });
+            
+          },
+          error: function(request, status, error){
+            console.log(status,error)
+            Swal.fire('Pemesanan Gagal!')
           }
         });
       });
@@ -176,8 +194,8 @@
         const id = parseInt(data.id);
         // console.log(nama)
 
-        if(orderedList.every(list => list.id !== id)) {
-          let dataNan = {'id': id, 'nama': nama, 'harga': harga, 'qty': 1}
+        if(orderedList.every(list => list.menu_id !== id)) {
+          let dataNan = {'menu_id': id, 'nama': nama, 'harga': harga, 'qty': 1}
           orderedList.push(dataNan);
           let listOrder = `
             <div class="col mb-3 px-2 li" data-id="${id}">

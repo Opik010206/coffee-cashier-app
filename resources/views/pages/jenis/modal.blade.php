@@ -23,8 +23,8 @@
                   <div class="col-sm-9">
                     <select class="form-control col-sm" name="kategory_id" id="kategory_id">
                       <option selected disabled>Pilih Kategori</option>
-                      @foreach ($category as $p => $label)
-                          <option value="{{ $p }}">{{ $label }}</option>
+                      @foreach ($category as $c => $nama)
+                          <option value="{{ $c }}">{{ $nama }}</option>
                       @endforeach
                     </select>
                   </div>

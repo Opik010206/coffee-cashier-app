@@ -47,7 +47,7 @@
           <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal">Tambah Data</a>
 
           {{-- Export --}}
-          <a href="#" class="btn btn-success mb-3">Export Excel</a>
+          <a href="/pelanggan/export/excel" class="btn btn-success mb-3">Export Excel</a>
           {{-- Import --}}
           <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a>
 

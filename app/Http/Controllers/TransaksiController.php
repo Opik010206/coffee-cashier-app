@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use App\Http\Requests\TransaksiRequest;
+use App\Models\DetailTransaksi;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use PDOException;
 
 class TransaksiController extends Controller
 {
@@ -43,12 +46,27 @@ class TransaksiController extends Controller
                 'metode_pembayaran' => 'cash',
                 'keterangan' => ''
             ]);
-        } catch (Exception $e){
-            return $e;
+
+            if (!$insertTransaksi->exitsts) return 'error';
+
+            // input detail transaksi
+            foreach ($request->orderedList as $detail) {
+                $insertDetailTransaksi = DetailTransaksi::create([
+                    'transaksi_id' => $notrans,
+                    'menu_id' => $detail['menu_id'],
+                    'jumlah' => $detail['qty'],
+                    'subtotal' => $detail['harga'] * $detail['qty']
+                ]);
+            }
+
+            DB::commit();
+            return response()->json(['status' => true, 'message'=>'Pemesanan berhasil']);
+        } catch (Exception | QueryException | PDOException $e){
+            return response()->json(['status' => false, 'message'=>'Pemesanan Gagal', 'error' => $e->getMessage()]);
             DB::rollBack();
         }
 
-        return $insertTransaksi;
+        return $insertDetailTransaksi;
     }
 
     /**
@@ -81,5 +99,12 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //
+    }
+
+
+    public function faktur($nofaktur)
+    {
+        $data = Transaksi::where('id', $nofaktur)->with(['detailTransaksi'])->first();
+        dd($data);
     }
 }

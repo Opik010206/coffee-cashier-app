@@ -88,10 +88,11 @@ class JenisController extends Controller
         return redirect('jenis')->with('success', 'Data jenis berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new jenisExport, 'jenis.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new JenisExport, $date.'_jenis.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');

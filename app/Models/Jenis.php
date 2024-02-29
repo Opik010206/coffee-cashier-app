@@ -14,7 +14,7 @@ class Jenis extends Model
     public $guarded = ['id'];
 
     public function kategory(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'kategory_id');
     }
 
     public function menu(){

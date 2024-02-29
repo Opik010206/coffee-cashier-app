@@ -77,10 +77,11 @@ class PelangganController extends Controller
         return redirect('pelanggan')->with('success', 'Data pelanggan berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new PelangganExport, 'pelanggan.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new PelangganExport, $date.'_pelanggan.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');

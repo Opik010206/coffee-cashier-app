@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama' => fake()->name(mt_rand(1,2))
         ];
     }
 }

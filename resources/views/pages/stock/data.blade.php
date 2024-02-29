@@ -1,4 +1,4 @@
-<table class="table table-responsive-md table-hover" id="tbl-category">
+<table class="table table-responsive-md table-hover" id="tbl-stock">
     <thead>
       <tr>
         <th scope="col">ID</th>

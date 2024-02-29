@@ -81,10 +81,11 @@ class StockController extends Controller
         return redirect('stock')->with('success', 'Data stock berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new stockExport, 'stock.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new StockExport, $date.'_stock.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');

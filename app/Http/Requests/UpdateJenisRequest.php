@@ -23,7 +23,7 @@ class UpdateJenisRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'ketegory_id' => 'required',
+            // 'ketegory_id' => 'required',
         ];
     }
     public function messages()

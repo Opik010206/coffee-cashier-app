@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Jenis>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DetailTransaksi>
  */
-class JenisFactory extends Factory
+class DetailTransaksiFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class JenisFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name(mt_rand(1,2)),
-            'kategory_id' => mt_rand(1,3)
+            //
         ];
     }
 }

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJenisRequest extends FormRequest
+class UpdateDetailTransaksiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,15 +22,7 @@ class StoreJenisRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
-            // 'ketegory_id' => 'required',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'nama.required' => 'nama',
-            'kategory_id.required' => 'kategori',
+            //
         ];
     }
 }

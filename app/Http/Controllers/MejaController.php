@@ -77,10 +77,11 @@ class MejaController extends Controller
         return redirect('meja')->with('success', 'Data meja berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new mejaExport, 'meja.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new MejaExport, $date.'_meja.xlsx');
+    }
 
     // public function import(Request $request){
     //     $data = $request->file('file');

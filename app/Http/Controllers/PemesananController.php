@@ -11,6 +11,7 @@ use App\Imports\PemesananImport;
 use App\Models\Jenis;
 use App\Models\Meja;
 use App\Models\Menu;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -22,9 +23,10 @@ class PemesananController extends Controller
     {
         $jenis = Jenis::with(['menu'])->latest()->get();
         $menu = Menu::with(['jenis'])->latest()->get();
+        $transaksi = Transaksi::all();
         // dd($jenis);
 
-        return view('pages.pemesanan.index', compact('jenis', 'menu'), [
+        return view('pages.pemesanan.index', compact('jenis', 'menu', 'transaksi'), [
             'menus' => $menu,
             'jenis' => $jenis
         ]);
