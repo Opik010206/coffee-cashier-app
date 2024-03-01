@@ -83,13 +83,13 @@ class MejaController extends Controller
         return Excel::download(new MejaExport, $date.'_meja.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('mejaData', $namafile);
-    //     Excel::import(new mejaImport, \public_path('/mejaData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('DataMeja', $namafile);
+        Excel::import(new MejaImport, \public_path('/DataMeja/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

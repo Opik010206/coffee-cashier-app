@@ -87,13 +87,13 @@ class StockController extends Controller
         return Excel::download(new StockExport, $date.'_stock.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('stockData', $namafile);
-    //     Excel::import(new stockImport, \public_path('/stockData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $file = $request->file('file');
+        $namafile = $file->getClientOriginalName();
+        $file->move('DataStock', $namafile);
+        Excel::import(new StockImport, \public_path('/DataStock/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

@@ -116,13 +116,13 @@ class MenuController extends Controller
         return Excel::download(new MenuExport, $date. '_Menu.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('menuData', $namafile);
-    //     Excel::import(new menuImport, \public_path('/menuData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('DataMenu', $namafile);
+        Excel::import(new MenuImport, \public_path('/DataMenu/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

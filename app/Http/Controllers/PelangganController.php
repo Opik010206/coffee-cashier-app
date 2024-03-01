@@ -83,13 +83,13 @@ class PelangganController extends Controller
         return Excel::download(new PelangganExport, $date.'_pelanggan.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('pelangganData', $namafile);
-    //     Excel::import(new pelangganImport, \public_path('/pelangganData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('DataPelanggan', $namafile);
+        Excel::import(new PelangganImport, \public_path('/DataPelanggan/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

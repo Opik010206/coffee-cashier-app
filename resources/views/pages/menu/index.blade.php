@@ -48,7 +48,7 @@
           {{-- Export --}}
           <a href="/menu/export/excel" class="btn btn-success mb-3">Export Excel</a>
           {{-- Import --}}
-          <a href="#" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#import">Import Excel</a>
+          <a href="#" class="btn btn-warning mb-3" data-toggle="modal" data-target="#import">Import Excel</a>
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
@@ -65,6 +65,33 @@
         <!-- partial -->
       </div>
     <!-- main-panel ends -->
+
+
+    {{-- Modal Import --}}
+    <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header d-flex align-items-center mr-3 py-3">
+              <h3 class="modal-title" id="staticBackdropLabel">Import Data</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <form action="{{ route('import_menu') }}" method="POST" class="form" enctype="multipart/form-data">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                  <div class="form-group">
+                    <input type="file" name="file" required>
+                  </div>
+              </div>
+              <div class="modal-footer pt-3 pb-0">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Keluar</button>
+                <button type="submit" class="btn btn-primary" id="simpan">Simpan Perubahan</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
 @endsection
 @include('pages.menu.modal')
 

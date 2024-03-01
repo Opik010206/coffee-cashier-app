@@ -83,13 +83,13 @@ class CategoryController extends Controller
         return Excel::download(new CategoryExport, $date.'_category.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('categoryData', $namafile);
-    //     Excel::import(new categoryImport, \public_path('/categoryData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $file = $request->file('file');
+        $namafile = $file->getClientOriginalName();
+        $file->move('DataCategory', $namafile);
+        Excel::import(new CategoryImport, public_path('/DataCategory/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

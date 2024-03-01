@@ -101,18 +101,19 @@ class KaryawanController extends Controller
         return redirect('karyawan')->with('success', 'Data karyawan berhasil dihapus');
     }
 
-    // public function export() 
-    // {
-    //     return Excel::download(new KaryawanExport, 'karyawan.xlsx');
-    // }
+    public function export() 
+    {
+        $date = now()->format('j-M-Y');
+        return Excel::download(new KaryawanExport, $date.'karyawan.xlsx');
+    }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('karyawanData', $namafile);
-    //     Excel::import(new karyawanImport, \public_path('/karyawanData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('DataKaryawan', $namafile);
+        Excel::import(new KaryawanImport, \public_path('/DataKaryawan/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 

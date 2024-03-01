@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             StockSeeder::class,
             MejaSeeder::class,
             PelangganSeeder::class,
+            KaryawanSeeder::class,
         ]);
     }
 }

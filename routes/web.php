@@ -30,31 +30,38 @@ Route::get('/about', [HomeController::class, 'about']);
 // Category
 Route::resource('/category', CategoryController::class);
 Route::get('/category/export/excel', [CategoryController::class, 'export']);
+Route::post('/category', [CategoryController::class, 'import'])->name('import_category');
 
 // Menu
 Route::resource('/menu', MenuController::class);
 Route::get('/menu/export/excel', [MenuController::class, 'export']);
+Route::post('/menu', [MenuController::class, 'import'])->name('import_menu');
 
 // Stock
 Route::resource('/stock', StockController::class);
 Route::get('/stock/export/excel', [StockController::class, 'export']);
+Route::post('/stock', [StockController::class, 'import'])->name('import_stock');
 
 // Jenis
 Route::resource('/jenis', JenisController::class);
 Route::get('/jenis/export/excel', [JenisController::class, 'export']);
+Route::post('/jenis', [JenisController::class, 'import'])->name('import_jenis');
 
 // Meja
 Route::resource('/meja', MejaController::class);
 Route::get('/meja/export/excel', [MejaController::class, 'export']);
+Route::post('/meja', [MejaController::class, 'import'])->name('import_meja');
 
 // Pelanggan
 Route::resource('/pelanggan', PelangganController::class);
 Route::get('/pelanggan/export/excel', [PelangganController::class, 'export']);
+Route::post('/pelanggan', [PelangganController::class, 'import'])->name('import_pelanggan');
 
 
 // Karyawan
 Route::resource('/karyawan', KaryawanController::class);
-Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']); //--------------->
+Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
+Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_karyawan');
 
 
 

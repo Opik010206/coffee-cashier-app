@@ -94,13 +94,13 @@ class JenisController extends Controller
         return Excel::download(new JenisExport, $date.'_jenis.xlsx');
     }
 
-    // public function import(Request $request){
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('jenisData', $namafile);
-    //     Excel::import(new jenisImport, \public_path('/jenisData/'.$namafile));
-    //     return redirect()->back()->with('success', 'Import data berhasil');
-    // }
+    public function import(Request $request){
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('DataJenis', $namafile);
+        Excel::import(new JenisImport, \public_path('/DataJenis/'.$namafile));
+        return redirect()->back()->with('success', 'Import data berhasil');
+    }
 }
 
 
