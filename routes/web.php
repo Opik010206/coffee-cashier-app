@@ -8,6 +8,7 @@ use App\Http\Controllers\MejaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\ProdukTitipanController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Http\Request;
@@ -64,6 +65,13 @@ Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
 Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_karyawan');
 
 
+
+// Produk Titipan
+Route::resource('/produk_titipan', ProdukTitipanController::class);
+Route::post('/produk_titipan/update/{id}', [ProdukTitipanController::class, 'updateStock'])->name('produk_titipan.update');
+
+Route::get('/produk_titipan/export/excel', [ProdukTitipanController::class, 'export']);
+Route::post('/impost_produk_titipan', [ProdukTitipanController::class, 'import'])->name('import_produk_titipan');
 
 Route::resource('/pemesanan', PemesananController::class);
 // Route::get('/jenis/{jenis}', [JenisController::class, 'show']);
