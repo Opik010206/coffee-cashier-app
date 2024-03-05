@@ -31,32 +31,32 @@ Route::get('/about', [HomeController::class, 'about']);
 // Category
 Route::resource('/category', CategoryController::class);
 Route::get('/category/export/excel', [CategoryController::class, 'export']);
-Route::post('/category', [CategoryController::class, 'import'])->name('import_category');
+Route::post('/category/import', [CategoryController::class, 'import'])->name('import_category');
 
 // Menu
 Route::resource('/menu', MenuController::class);
 Route::get('/menu/export/excel', [MenuController::class, 'export']);
-Route::post('/menu', [MenuController::class, 'import'])->name('import_menu');
+Route::post('/menu/import', [MenuController::class, 'import'])->name('import_menu');
 
 // Stock
 Route::resource('/stock', StockController::class);
 Route::get('/stock/export/excel', [StockController::class, 'export']);
-Route::post('/stock', [StockController::class, 'import'])->name('import_stock');
+Route::post('/stock/import', [StockController::class, 'import'])->name('import_stock');
 
 // Jenis
 Route::resource('/jenis', JenisController::class);
 Route::get('/jenis/export/excel', [JenisController::class, 'export']);
-Route::post('/jenis', [JenisController::class, 'import'])->name('import_jenis');
+Route::post('/jenis/import', [JenisController::class, 'import'])->name('import_jenis');
 
 // Meja
 Route::resource('/meja', MejaController::class);
 Route::get('/meja/export/excel', [MejaController::class, 'export']);
-Route::post('/meja', [MejaController::class, 'import'])->name('import_meja');
+Route::post('/meja/import', [MejaController::class, 'import'])->name('import_meja');
 
 // Pelanggan
 Route::resource('/pelanggan', PelangganController::class);
 Route::get('/pelanggan/export/excel', [PelangganController::class, 'export']);
-Route::post('/pelanggan', [PelangganController::class, 'import'])->name('import_pelanggan');
+Route::post('/pelanggan/import', [PelangganController::class, 'import'])->name('import_pelanggan');
 
 
 // Karyawan
@@ -68,10 +68,9 @@ Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_ka
 
 // Produk Titipan
 Route::resource('/produk_titipan', ProdukTitipanController::class);
-Route::post('/produk_titipan/update/{id}', [ProdukTitipanController::class, 'updateStock'])->name('produk_titipan.update');
-
+Route::get('data', [ProdukTitipanController::class, 'dataProduk']);
 Route::get('/produk_titipan/export/excel', [ProdukTitipanController::class, 'export']);
-Route::post('/impost_produk_titipan', [ProdukTitipanController::class, 'import'])->name('import_produk_titipan');
+Route::post('/import_produk_titipan', [ProdukTitipanController::class, 'import'])->name('import_produk_titipan');
 
 Route::resource('/pemesanan', PemesananController::class);
 // Route::get('/jenis/{jenis}', [JenisController::class, 'show']);

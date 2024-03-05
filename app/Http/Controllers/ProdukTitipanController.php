@@ -20,6 +20,11 @@ class ProdukTitipanController extends Controller
         $produk = ProdukTitipan::all();
         return view('pages.produk.index', compact('produk'));
     }
+    public function dataProduk()
+    {
+        $produk = ProdukTitipan::all();
+        return view('pages.produk.data_penjualan', compact('produk'));
+    }
 
     /**
      * Show the form for creating a new resource.

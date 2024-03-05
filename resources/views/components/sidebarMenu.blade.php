@@ -87,6 +87,18 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/produk_titipan">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Produk Titipan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="data">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Data Produk</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <i class="icon-head menu-icon"></i>
           <span class="menu-title">User Pages</span>
