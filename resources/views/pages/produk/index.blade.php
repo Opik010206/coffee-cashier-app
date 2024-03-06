@@ -214,7 +214,7 @@
             let hargaBeli = parseFloat($(this).val()) || 0;
             
             // Lakukan perhitungan untuk menentukan harga jual (misalnya, tambahkan markup 10%)
-            let keuntungan = 70; // Keuntungan 70%
+            let keuntungan = 55; // Keuntungan 70%
             let hargaJual = hargaBeli + (hargaBeli * keuntungan / 100);
             
             // Bulatkan harga jual ke nilai terdekat

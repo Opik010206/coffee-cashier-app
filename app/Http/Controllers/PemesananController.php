@@ -21,15 +21,13 @@ class PemesananController extends Controller
      */
     public function index()
     {
+        $data['pemesanan'] = Pemesanan::get();
+        $menus = Menu::with(['jenis'])->latest()->get();
         $jenis = Jenis::with(['menu'])->latest()->get();
-        $menu = Menu::with(['jenis'])->latest()->get();
-        $transaksi = Transaksi::all();
+        // $transaksi = Transaksi::all();
         // dd($jenis);
 
-        return view('pages.pemesanan.index', compact('jenis', 'menu', 'transaksi'), [
-            'menus' => $menu,
-            'jenis' => $jenis
-        ]);
+        return view('pages.pemesanan.index', compact('data', 'menus', 'jenis'));
     }
 
     /**
@@ -47,10 +45,12 @@ class PemesananController extends Controller
     public function store(StorePemesananRequest $request)
     {
         // dd($request);
-        Pemesanan::create($request->all());
+        // Pemesanan::create($request->all());
+        $validated = $request->validate();
+        Pemesanan::create($validated);
 
 
-        return redirect('pemesanan')->with('success', 'Data pemesanan berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Data pemesanan berhasil ditambahkan');
     }
 
     /**

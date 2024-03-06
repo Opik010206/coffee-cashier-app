@@ -22,7 +22,8 @@ class TransaksiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'total' => 'required',
+            'orderedList' => 'required'
         ];
     }
 }

@@ -144,7 +144,7 @@
       
       $('.ordered-list').on('click', '.remove-item', function(){
         const item = $(this).closest('.li')[0];
-        let index = orderedList.findIndex(list => list.id == parseInt(item.dataset.id));
+        let index = orderedList.findIndex(list => list.menu_id == parseInt(item.dataset.id));
         orderedList.splice(index, 1);
         $(item).remove();
         $('#total').html(sum());
@@ -171,7 +171,7 @@
               denyButtonText: `Ok`
             }).then((result) => {
               if(result.isConfirmed) {
-                window.open("{{ url('nota/232323') }}")
+                window.open("{{ url('nota') }}/"+data.notrans)
                 location.reload()
               }else if (result.isDenied) {
                 location.reload()

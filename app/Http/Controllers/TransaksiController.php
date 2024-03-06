@@ -36,22 +36,23 @@ class TransaksiController extends Controller
         // dd($request);
         try {
             // DB::beginTransaction();
+            $validated = $request->validate();
             $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
             $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id, 8,4));
     
             $insertTransaksi = Transaksi::create([
                 'id' => $notrans,
                 'tanggal' => date('Y-m-d'),
-                'total_harga' => $request->total,
+                'total_harga' => $request['total'],
                 'metode_pembayaran' => 'cash',
                 'keterangan' => ''
             ]);
 
-            if (!$insertTransaksi->exitsts) return 'error';
+            // if (!$insertTransaksi->exitsts) return 'error';
 
             // input detail transaksi
-            foreach ($request->orderedList as $detail) {
-                $insertDetailTransaksi = DetailTransaksi::create([
+            foreach ($request['orderedList'] as $detail) {
+                DetailTransaksi::create([
                     'transaksi_id' => $notrans,
                     'menu_id' => $detail['menu_id'],
                     'jumlah' => $detail['qty'],
@@ -60,13 +61,19 @@ class TransaksiController extends Controller
             }
 
             DB::commit();
-            return response()->json(['status' => true, 'message'=>'Pemesanan berhasil']);
+            return response()->json(['status' => true, 'message'=>'Pemesanan berhasil', 'notrans' => $notrans]);
         } catch (Exception | QueryException | PDOException $e){
             return response()->json(['status' => false, 'message'=>'Pemesanan Gagal', 'error' => $e->getMessage()]);
-            DB::rollBack();
+            // DB::rollBack();
         }
 
-        return $insertDetailTransaksi;
+        // return $insertDetailTransaksi;
+    }
+
+    public function faktur($notafaktur)
+    {
+        $transaksi = Transaksi::findOrFail($notafaktur);
+        return view('pages.pemesanan.faktur', compact('transaksi'));
     }
 
     /**
@@ -99,12 +106,5 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //
-    }
-
-
-    public function faktur($nofaktur)
-    {
-        $data = Transaksi::where('id', $nofaktur)->with(['detailTransaksi'])->first();
-        dd($data);
     }
 }
