@@ -4,17 +4,23 @@ namespace App\Exports;
 
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
-class CategoryExport implements FromView
+class CategoryExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function view(): View
+    // public function view(): View
+    // {
+    //     return view('pages.category.export', [
+    //         'category' => Category::all()
+    //     ]);
+    // }
+
+    public function collection()
     {
-        return view('pages.category.export', [
-            'category' => Category::all()
-        ]);
+        return Category::all();
     }
+    
 }

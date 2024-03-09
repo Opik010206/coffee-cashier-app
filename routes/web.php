@@ -11,6 +11,7 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProdukTitipanController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -77,4 +78,6 @@ Route::resource('/pemesanan', PemesananController::class);
 Route::resource('/transaksi', TransaksiController::class);
 Route::get('/nota/{nofaktor}', [TransaksiController::class, 'faktur']);
 
-
+// Login
+Route::post('/login/cek', [UserController::class, 'cekLogin'])->name('cekLogin');
+Route::get('/login', [UserController::class, 'index'])->name('login');
