@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_id');
-            // $table->foreign('transaksi_id')->references('id')->on('transaksis')->onDelete('cascade');
+            $table->string('transaksi_id')->index();
+            $table->foreign('transaksi_id')->references('id')->on('transaksis')->onDelete('cascade');
             $table->foreignId('menu_id');
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->integer('jumlah');

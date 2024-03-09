@@ -150,42 +150,6 @@
         $('#total').html(sum());
       });
 
-      $('#btn-bayar').on('click', function(){
-        // console.log('broo')
-        $.ajax({
-          url: "{{ route('transaksi.store') }}",
-          method: "POST",
-
-          data: {
-            "_token": "{{ csrf_token() }}",
-            orderedList: orderedList,
-            total: sum()
-          },
-
-          success: function(data){
-            console.log(data)
-            Swal.fire({
-              title: data.message,
-              showDenyButton: true,
-              confirmButtonText: 'Cetak Nota',
-              denyButtonText: `Ok`
-            }).then((result) => {
-              if(result.isConfirmed) {
-                window.open("{{ url('nota') }}/"+data.notrans)
-                location.reload()
-              }else if (result.isDenied) {
-                location.reload()
-              }
-            });
-            
-          },
-          error: function(request, status, error){
-            console.log(status,error)
-            Swal.fire('Pemesanan Gagal!')
-          }
-        });
-      });
-
       $('.menu-item').click(function(){ 
         // const menu_clicked = $(this).text();
         const data = $(this)[0].dataset;
@@ -219,6 +183,42 @@
         $('#total').html(sum());
       })
       // console.log(orderedList);
+
+      $('#btn-bayar').on('click', function(){
+        // console.log('broo')
+        $.ajax({
+          url: "{{ route('transaksi.store') }}",
+          method: "POST",
+
+          data: {
+            "_token": "{{ csrf_token() }}",
+            orderedList: orderedList,
+            total: sum()
+          },
+
+          success: function(data){
+            console.log(data)
+            Swal.fire({
+              title: data.message,
+              showDenyButton: true,
+              confirmButtonText: "Cetak Nota",
+              denyButtonText: `Ok`
+            }).then((result) => {
+              if(result.isConfirmed) {
+                window.open("{{ url('nota') }}/"+data.notrans)
+                location.reload()
+              }else if (result.isDenied) {
+                location.reload()
+              }
+            });
+            
+          },
+          error: function(request, status, error){
+            console.log(status,error)
+            Swal.fire('Pemesanan Gagal!')
+          }
+        });
+      });
 
     })
     

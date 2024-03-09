@@ -35,15 +35,17 @@ class TransaksiController extends Controller
     {
         // dd($request);
         try {
-            // DB::beginTransaction();
-            $validated = $request->validate();
+            DB::beginTransaction();
+            // $validated = $request->validate();
             $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
-            $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id, 8,4));
+            $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id->id, 8,4)+1);
+
+            // dd($notrans);
     
-            $insertTransaksi = Transaksi::create([
+            Transaksi::create([
                 'id' => $notrans,
                 'tanggal' => date('Y-m-d'),
-                'total_harga' => $request['total'],
+                'total_harga' => $request->total,
                 'metode_pembayaran' => 'cash',
                 'keterangan' => ''
             ]);
@@ -51,7 +53,7 @@ class TransaksiController extends Controller
             // if (!$insertTransaksi->exitsts) return 'error';
 
             // input detail transaksi
-            foreach ($request['orderedList'] as $detail) {
+            foreach ($request->orderedList as $detail) {
                 DetailTransaksi::create([
                     'transaksi_id' => $notrans,
                     'menu_id' => $detail['menu_id'],
@@ -64,16 +66,25 @@ class TransaksiController extends Controller
             return response()->json(['status' => true, 'message'=>'Pemesanan berhasil', 'notrans' => $notrans]);
         } catch (Exception | QueryException | PDOException $e){
             return response()->json(['status' => false, 'message'=>'Pemesanan Gagal', 'error' => $e->getMessage()]);
-            // DB::rollBack();
+            DB::rollBack();
         }
 
-        // return $insertDetailTransaksi;
+        // return $insertTransaksi;
     }
 
     public function faktur($notafaktur)
     {
-        $transaksi = Transaksi::findOrFail($notafaktur);
-        return view('pages.pemesanan.faktur', compact('transaksi'));
+        try{
+            $data['transaksi'] = Transaksi::where('id', $notafaktur)->with(['detailTransaksi' => function($query){
+                $query->with('menu');
+            }])->first();
+
+            return view('pages.pemesanan.faktur')->with($data);
+        } catch (Exception | QueryException | PDOException $e) {
+            return response()->json(['status'=>false, 'message' => 'Pemesanan Gagal']);
+        }
+        // $transaksi = Transaksi::findOrFail($notafaktur);
+        // return view('pages.pemesanan.faktur', compact('transaksi'));
     }
 
     /**
