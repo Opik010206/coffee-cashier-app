@@ -78,7 +78,7 @@
               <i class="ti-user text-primary"></i>
               Profile
             </a>
-            <a class="dropdown-item">
+            <a href="{{ route('logout') }}" class="dropdown-item">
               <i class="ti-power-off text-primary"></i>
               Logout
             </a>

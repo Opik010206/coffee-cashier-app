@@ -16,7 +16,10 @@ class UserController extends Controller
                     return redirect()->intended('/');
                     break;
                 case '2':
-                    return redirect()->intended('pemesanan');
+                    return redirect()->intended('/');
+                    break;
+                case '3':
+                    return redirect()->intended('/');
                     break;
             }
         }
@@ -34,7 +37,10 @@ class UserController extends Controller
                     return redirect()->intended('/');
                     break;
                 case '2':
-                    return redirect()->intended('pemesanan');
+                    return redirect()->intended('/');
+                    break;
+                case '3':
+                    return redirect()->intended('/');
                     break;
             }
             return redirect()->intended('/');
@@ -43,5 +49,15 @@ class UserController extends Controller
         return back()->withErrors([
             'nofound' => 'Email or password is wrong'
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

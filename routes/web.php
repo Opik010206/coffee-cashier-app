@@ -26,58 +26,67 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'dashboard']);
-Route::get('/about', [HomeController::class, 'about']);
 
-// Category
-Route::resource('/category', CategoryController::class);
-Route::get('/category/export/excel', [CategoryController::class, 'export']);
-Route::post('/category/import', [CategoryController::class, 'import'])->name('import_category');
+Route::group(['middleware' => 'auth'], function(){
 
-// Menu
-Route::resource('/menu', MenuController::class);
-Route::get('/menu/export/excel', [MenuController::class, 'export']);
-Route::post('/menu/import', [MenuController::class, 'import'])->name('import_menu');
+    Route::get('/', [HomeController::class, 'dashboard']);
+    Route::get('/about', [HomeController::class, 'about']);
+    
+    // Route Admin
+    Route::group(['middleware' => ['userLogin:3']], function(){
+        // Category
+        Route::resource('/category', CategoryController::class);
+        Route::get('/category/export/excel', [CategoryController::class, 'export']);
+        Route::post('/category/import', [CategoryController::class, 'import'])->name('import_category');
+        
+        // Menu
+        Route::resource('/menu', MenuController::class);
+        Route::get('/menu/export/excel', [MenuController::class, 'export']);
+        Route::post('/menu/import', [MenuController::class, 'import'])->name('import_menu');
+        
+        // Stock
+        Route::resource('/stock', StockController::class);
+        Route::get('/stock/export/excel', [StockController::class, 'export']);
+        Route::post('/stock/import', [StockController::class, 'import'])->name('import_stock');
+        
+        // Jenis
+        Route::resource('/jenis', JenisController::class);
+        Route::get('/jenis/export/excel', [JenisController::class, 'export']);
+        Route::post('/jenis/import', [JenisController::class, 'import'])->name('import_jenis');
+        
+        // Meja
+        Route::resource('/meja', MejaController::class);
+        Route::get('/meja/export/excel', [MejaController::class, 'export']);
+        Route::post('/meja/import', [MejaController::class, 'import'])->name('import_meja');
+        
+        // Pelanggan
+        Route::resource('/pelanggan', PelangganController::class);
+        Route::get('/pelanggan/export/excel', [PelangganController::class, 'export']);
+        Route::post('/pelanggan/import', [PelangganController::class, 'import'])->name('import_pelanggan');
+        
+        // Karyawan
+        Route::resource('/karyawan', KaryawanController::class);
+        Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
+        Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_karyawan');
+        
+        // Produk Titipan
+        Route::resource('/produk_titipan', ProdukTitipanController::class);
+        Route::get('data', [ProdukTitipanController::class, 'dataProduk']);
+        Route::get('/produk_titipan/export/excel', [ProdukTitipanController::class, 'export']);
+        Route::post('/import_produk_titipan', [ProdukTitipanController::class, 'import'])->name('import_produk_titipan');
+    });
 
-// Stock
-Route::resource('/stock', StockController::class);
-Route::get('/stock/export/excel', [StockController::class, 'export']);
-Route::post('/stock/import', [StockController::class, 'import'])->name('import_stock');
+    // Route untuk kasir
+    Route::group(['middleware' => ['userLogin:2']], function(){
+        Route::resource('/pemesanan', PemesananController::class);
+        // Route::get('/jenis/{jenis}', [JenisController::class, 'show']);
+        Route::resource('/transaksi', TransaksiController::class);
+        Route::get('/nota/{nofaktor}', [TransaksiController::class, 'faktur']);
+    });
 
-// Jenis
-Route::resource('/jenis', JenisController::class);
-Route::get('/jenis/export/excel', [JenisController::class, 'export']);
-Route::post('/jenis/import', [JenisController::class, 'import'])->name('import_jenis');
-
-// Meja
-Route::resource('/meja', MejaController::class);
-Route::get('/meja/export/excel', [MejaController::class, 'export']);
-Route::post('/meja/import', [MejaController::class, 'import'])->name('import_meja');
-
-// Pelanggan
-Route::resource('/pelanggan', PelangganController::class);
-Route::get('/pelanggan/export/excel', [PelangganController::class, 'export']);
-Route::post('/pelanggan/import', [PelangganController::class, 'import'])->name('import_pelanggan');
-
-
-// Karyawan
-Route::resource('/karyawan', KaryawanController::class);
-Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
-Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_karyawan');
-
-
-
-// Produk Titipan
-Route::resource('/produk_titipan', ProdukTitipanController::class);
-Route::get('data', [ProdukTitipanController::class, 'dataProduk']);
-Route::get('/produk_titipan/export/excel', [ProdukTitipanController::class, 'export']);
-Route::post('/import_produk_titipan', [ProdukTitipanController::class, 'import'])->name('import_produk_titipan');
-
-Route::resource('/pemesanan', PemesananController::class);
-// Route::get('/jenis/{jenis}', [JenisController::class, 'show']);
-Route::resource('/transaksi', TransaksiController::class);
-Route::get('/nota/{nofaktor}', [TransaksiController::class, 'faktur']);
+});
 
 // Login
 Route::post('/login/cek', [UserController::class, 'cekLogin'])->name('cekLogin');
 Route::get('/login', [UserController::class, 'index'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

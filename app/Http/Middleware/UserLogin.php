@@ -14,7 +14,7 @@ class UserLogin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $rules): Response
+    public function handle(Request $request, Closure $next, $rules)
     {
         $user = Auth::user();
 
@@ -25,7 +25,9 @@ class UserLogin
             return $next($request);
         }
 
-        return redirect('login')->with('error', 'you have no privildge');
+        abort(403, 'Unauthorized');
+
+        // return redirect('login')->with('error', 'you have no privildge');
         // return $next($request);
     }
 }
