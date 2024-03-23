@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisController;
@@ -67,7 +68,12 @@ Route::group(['middleware' => 'auth'], function(){
         // Karyawan
         Route::resource('/karyawan', KaryawanController::class);
         Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
-        Route::post('/karyawan', [KaryawanController::class, 'import'])->name('import_karyawan');
+        Route::post('/karyawan/import', [KaryawanController::class, 'import'])->name('import_karyawan');
+
+        // Karyawan
+        Route::resource('/absensi', AbsensiController::class);
+        Route::get('/absensi/export/excel', [AbsensiController::class, 'export']);
+        Route::post('/absensi/import', [AbsensiController::class, 'import'])->name('import_absensi');
         
         // Produk Titipan
         Route::resource('/produk_titipan', ProdukTitipanController::class);
