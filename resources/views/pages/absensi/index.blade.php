@@ -121,7 +121,7 @@
           if (result.isConfirmed) $(e.target).closest('form').submit()
           else swal.close()
         })
-      })
+    })
 
     // Modal Form
     $('#modal').on('show.bs.modal', function(e){
@@ -156,5 +156,81 @@
         modal.find('#method').html('');
       }
     })
+
+    // Edit Status
+    $('.edit-status').change(function(e){
+      let id = $(this).attr('data-id');
+      let status = $(this).val();
+      $.ajax({
+        url: 'absensi/' + id,
+        type: 'PUT',
+        data: {
+          status: status,
+          // Menyertakan token CSRF dari meta tag
+          _token: $('meta[name="csrf-token"]').attr('content'),
+        },
+        success:function(response) {
+          console.log(response.result.status);
+          // Reload halaman setelah permintaan AJAX berhasil
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            alert('Gagal memperbarui status.');
+        }
+      })
+    })
+
+    // Absensi Selesai / Waktu Keluar
+    $(document).ready(function(){
+      $('body').on('click', '.btn-info', function(){
+        let waktu = new Date(); // Dapatkan waktu saat tombol diklik
+        let jam = waktu.getHours();
+        let menit = waktu.getMinutes();
+        let detik = waktu.getSeconds();
+
+        // Format waktu ke dalam string dengan menambahkan nol di depan jika angka kurang dari 10
+        let waktuSelesai = jam.toString().padStart(2, '0') + ':' + 
+                            menit.toString().padStart(2, '0') + ':' + 
+                            detik.toString().padStart(2, '0');
+
+        // Temukan elemen waktu keluar di baris yang sesuai dengan tombol yang diklik
+        let waktuKeluarElement = $(this).closest('tr').find('.waktu-keluar');
+
+        // Perbarui teks waktu keluar dengan waktu selesai
+        // console.log(waktuSelesai)
+        waktuKeluarElement.val(waktuSelesai);
+
+        // Memasukkan data ke database
+        let id = $(this).attr('data-id');
+        // let waktu_keluar = $('.waktu_keluar').val(waktuSelesai);
+        $.ajax({
+          url: 'absensi/' + id,
+          type: 'PUT',
+          data: {
+            waktu_keluar: waktuSelesai,
+            // Menyertakan token CSRF dari meta tag
+            _token: $('meta[name="csrf-token"]').attr('content'),
+          },
+          success:function(response) {
+            console.log(response.result.waktu_keluar);
+            // alert(response.result.waktu_keluar);
+            // Reload halaman setelah permintaan AJAX berhasil
+            location.reload();
+          },
+          error: function(xhr, status, error) {
+              console.error(error);
+              alert('Gagal memperbarui status.');
+          }
+        })
+
+        // Tampilkan elemen waktu keluar
+        waktuKeluarElement.removeClass('d-none');
+
+        // Sembunyikan tombol "Selesai"
+        $(this).hide();
+      });
+    });
+
   </script>
 @endpush

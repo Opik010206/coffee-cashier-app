@@ -51,7 +51,12 @@ class AbsensiController extends Controller
      */
     public function edit(Absensi $absensi)
     {
-        //
+        return response()->json(['result' => $absensi]);
+        
+    }
+
+    public function editStatus(Request $request){
+        return 'halo';
     }
 
     /**
@@ -59,7 +64,10 @@ class AbsensiController extends Controller
      */
     public function update(UpdateAbsensiRequest $request, Absensi $absensi)
     {
-        //
+        $absensi->update($request->all());
+        return response()->json(['result' => $absensi]);
+        // return redirect('absensi')->with('success', 'Data berhasil ditambahkan');
+
     }
 
     /**

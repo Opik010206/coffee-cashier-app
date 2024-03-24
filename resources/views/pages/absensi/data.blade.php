@@ -1,4 +1,4 @@
-<table class="table table-responsive-md table-hover" id="tbl-meja">
+<table class="table table-responsive-md table-hover" id="tbl-absensi">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -18,14 +18,15 @@
                 <td>{{ $c->tanggal_masuk }}</td>
                 <td>{{ $c->waktu_masuk }}</td>
                 <td>
-                    <select class="form-control col-sm" name="status" id="status">
-                        <option value="{{ $c->status }}" {{ $c->status === 'masuk' ? 'selected' : '' }}>Masuk</option>
-                        <option value="{{ $c->status }}" {{ $c->status === 'sakit' ? 'selected' : '' }}>Sakit</option>
-                        <option value="{{ $c->status }}" {{ $c->status === 'cuti' ? 'selected' : '' }}>Cuti</option>
+                    <select class="form-control col-sm edit-status" data-id="{{ $c->id }}" name="status" id="status">
+                        <option value="masuk" {{ $c->status === 'masuk' ? 'selected' : '' }}>Masuk</option>
+                        <option value="sakit" {{ $c->status === 'sakit' ? 'selected' : '' }}>Sakit</option>
+                        <option value="cuti" {{ $c->status === 'cuti' ? 'selected' : '' }}>Cuti</option>
                     </select>
                 </td>
                 <td>
-                    <button class="btn btn-secondary">Selesai</button>    
+                    <button class="btn btn-info py-2" data-id="{{ $c->id }}">Selesai</button>    
+                    <input disabled class="waktu-keluar d-none" value="{{ $c->waktu_keluar }}" name="waktu_keluar" id="waktu_keluar" style="width: 70px; border: none;">
                 </td>
                 <td class="">
                     {{-- Edit --}}
