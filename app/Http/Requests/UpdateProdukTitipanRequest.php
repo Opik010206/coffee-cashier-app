@@ -22,11 +22,11 @@ class UpdateProdukTitipanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_produk' => 'required',
-            'nama_supplier' => 'required',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'stock' => 'required',
+            // 'nama_produk' => 'required',
+            // 'nama_supplier' => 'required',
+            // 'harga_beli' => 'required',
+            // 'harga_jual' => 'required',
+            // 'stock' => 'required',
             // 'keterangan' => 'required',
         ];
     }

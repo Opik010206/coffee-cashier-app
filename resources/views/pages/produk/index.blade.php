@@ -106,9 +106,9 @@
     $(function(){
       $('#tbl-produk_titipan').DataTable()
 
+    })
 
-
-
+    $(document).ready(function(){
       $('.stock-cell').dblclick(function() {
         // console.log('brooooooo')
           // Menampilkan input angka dan menyembunyikan nilai stok
@@ -119,28 +119,30 @@
       $('.stock-input').keypress(function(e) {
           if (e.which === 13) { // 13 adalah kode tombol "Enter"
               // Mendapatkan nilai stok baru
-              var newStock = $(this).val();
-
+              let newStock = $(this).val();
               // Mendapatkan ID atau identifikasi unik dari record data (jika perlu)
-              var recordId = $(this).data('id');
-              var csrfToken = $('meta[name="csrf-token"]').attr('content');
+              let id = $(this).data('id');
+
+              let csrfToken = $('meta[name="csrf-token"]').attr('content');
 
               // Simpan perubahan stok ke database melalui AJAX
               $.ajax({
-                  url: "produk_titipan/"+ recordId,
-                  method: 'POST',
+                  url: 'produk_titipan/'+ id,
+                  method: 'PUT',
                   data: {
                     // Sertakan token CSRF dalam data permintaan
-                    _token: csrfToken,
                     stock: newStock,
+
+                    _token: csrfToken,
                   },
                   success: function(response) {
                       // Memperbarui tampilan dengan nilai stok baru
+                      // console.log(response.result.stock)
                       $('.stock-value').text(newStock);
                       $('.stock-input').val(newStock);
                   },
                   error: function(xhr, status, error) {
-                      console.error(error);
+                      console.log(xhr);
                       alert('Gagal memperbarui stok.');
                   }
               });

@@ -64,8 +64,11 @@ class ProdukTitipanController extends Controller
      */
     public function update(UpdateProdukTitipanRequest $request, ProdukTitipan $produkTitipan)
     {
+        // return 'berhasil';
+        
         $produkTitipan->update($request->all());
-        return redirect('produk_titipan')->with('success', 'Data Berhasil Di Ubah');
+        return response()->json(['result' => $produkTitipan]);
+        // return redirect('produk_titipan')->with('success', 'Data Berhasil Di Ubah');
     }
 
     /**

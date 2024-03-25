@@ -183,7 +183,16 @@
 
     // Absensi Selesai / Waktu Keluar
     $(document).ready(function(){
+      // Memeriksa status tombol saat halaman dimuat
+      var statusSelesai = localStorage.getItem('status_selesai');
+      if (statusSelesai === 'true') {
+          $('.waktu-keluar').removeClass('d-none'); // Menampilkan waktu keluar
+          $('.btn-info').hide(); // Sembunyikan tombol "Selesai"
+      }
+
+      // Menyimpan status tombol saat diklik
       $('body').on('click', '.btn-info', function(){
+        localStorage.setItem('status_selesai', 'true');
         let waktu = new Date(); // Dapatkan waktu saat tombol diklik
         let jam = waktu.getHours();
         let menit = waktu.getMinutes();
@@ -216,7 +225,7 @@
             console.log(response.result.waktu_keluar);
             // alert(response.result.waktu_keluar);
             // Reload halaman setelah permintaan AJAX berhasil
-            location.reload();
+            // location.reload();
           },
           error: function(xhr, status, error) {
               console.error(error);
