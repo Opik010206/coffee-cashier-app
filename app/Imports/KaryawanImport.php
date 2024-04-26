@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Karyawan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class KaryawanImport implements ToModel
+class KaryawanImport implements ToModel, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -14,17 +15,22 @@ class KaryawanImport implements ToModel
     public function model(array $row)
     {
         return new Karyawan([
-            'nip' => $row[1],
-            'nik' => $row[2],
-            'nama' => $row[3],
-            'jenis_kelamin' => $row[4],
-            'tempat_lahir' => $row[5],
-            'tanggal_lahir' => $row[6],
-            'no_telp' => $row[7],
-            'agama' => $row[8],
-            'status_nikah' => $row[9],
-            'alamat' => $row[10],
-            'foto' => $row[11],
+            'nip' => $row['nip'],
+            'nik' => $row['nik'],
+            'nama' => $row['nama_karyawan'],
+            'jenis_kelamin' => $row['jenis_kelamin'],
+            'tempat_lahir' => $row['tempat_lahir'],
+            'tanggal_lahir' => $row['tanggal_lahir'],
+            'no_telp' => $row['no_hp'],
+            'agama' => $row['agama'],
+            'status_nikah' => $row['status_nikah'],
+            'alamat' => $row['alamat'],
+            'foto' => $row['image_file'],
         ]);
+    }
+
+    public function headingRow(): int
+    {
+        return 4;
     }
 }

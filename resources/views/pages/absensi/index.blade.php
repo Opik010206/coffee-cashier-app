@@ -50,6 +50,8 @@
           <a href="/absensi/export/excel" class="btn btn-success mb-3">Export Excel</a>
           {{-- Import --}}
           <a href="#" class="btn btn-warning mb-3" data-toggle="modal" data-target="#import">Import Excel</a>
+          {{-- PDF --}}
+          <a href="{{ route('generate-pdf') }}" class="btn btn-info mb-3">Export PDF</a>
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
@@ -187,11 +189,11 @@
       var statusSelesai = localStorage.getItem('status_selesai');
       if (statusSelesai === 'true') {
           $('.waktu-keluar').removeClass('d-none'); // Menampilkan waktu keluar
-          $('.btn-info').hide(); // Sembunyikan tombol "Selesai"
+          $('.btn-selesai').hide(); // Sembunyikan tombol "Selesai"
       }
 
       // Menyimpan status tombol saat diklik
-      $('body').on('click', '.btn-info', function(){
+      $('body').on('click', '.btn-selesai', function(){
         localStorage.setItem('status_selesai', 'true');
         let waktu = new Date(); // Dapatkan waktu saat tombol diklik
         let jam = waktu.getHours();
@@ -240,6 +242,14 @@
         $(this).hide();
       });
     });
+
+
+
+    // const nama = "rofiq";
+    // console.log(nama);
+
+    const nama = ['harsa', 'rofiq'];
+    console.log(nama[0]);
 
   </script>
 @endpush

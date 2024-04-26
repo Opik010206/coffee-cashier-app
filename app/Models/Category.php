@@ -14,6 +14,8 @@ class Category extends Model
 
     public $guarded = ['id'];
 
+    public $fillable = ['nama'];
+
     public function jenis(){
         return $this->hasMany(Jenis::class);
     }

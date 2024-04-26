@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Jenis;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class JenisImport implements ToModel
+class JenisImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,8 +16,13 @@ class JenisImport implements ToModel
     public function model(array $row)
     {
         return new Jenis([
-            'nama' => $row[1],
-            'kategory_id' => $row[2],
+            'nama' => $row['nama_jenis'],
+            'kategory_id' => $row['kategori_id'],
         ]);
+    }
+
+    public function headingRow(): int
+    {
+        return 4;  // The row number at which the first row
     }
 }

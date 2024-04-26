@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateAbsensiRequest;
 use App\Imports\AbsensiImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class AbsensiController extends Controller
 {
@@ -75,7 +77,8 @@ class AbsensiController extends Controller
      */
     public function destroy(Absensi $absensi)
     {
-        //
+        $absensi->delete();
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 
     public function export() 
@@ -90,5 +93,26 @@ class AbsensiController extends Controller
         $data->move('DataAbsensi', $namafile);
         Excel::import(new AbsensiImport, \public_path('/DataAbsensi/'.$namafile));
         return redirect()->back()->with('success', 'Import data berhasil');
+    }
+
+    public function generatePdf()
+    {
+        $data['absensi'] = Absensi::get();
+
+        // Load view
+        $pdf = new Dompdf();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $pdf->setOptions($options);
+        $pdf->loadHtml(view('pages.absensi.pdf', $data)->render());
+
+        // (Optional) Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render PDF (optional: save to file)
+        $pdf->render();
+
+        // Output PDF to browser
+        return $pdf->stream('document.pdf');
     }
 }

@@ -52,12 +52,19 @@ class JenisController extends Controller
      */
     public function show(Jenis $jeni)
     {
+        // return 'berhasil';
         $jenis = Jenis::with(['kategory', 'menu'])->latest()->get();
-        return view('pages.pemesanan.index', [
+        return response()->json(['result' => [
             'jenis' => $jenis,
             'menus' => $jeni->menu
             
-        ]);
+        ]]);
+
+        // return view('pages.pemesanan.index', [
+        //     'jenis' => $jenis,
+        //     'menus' => $jeni->menu
+            
+        // ]);
     }
 
     /**

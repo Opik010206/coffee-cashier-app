@@ -4,8 +4,10 @@ namespace App\Imports;
 
 use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class CategoryImport implements ToModel
+
+class CategoryImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,8 +17,11 @@ class CategoryImport implements ToModel
     public function model(array $row)
     {
         return new Category([
-            // 'id' => $row[0],
-            'nama' => $row[1]
+            'nama' => $row['nama_kategori'],  //menyimpan data nama kategori dari excel ke database
         ]);
+    }
+    public function headingRow(): int
+    {
+        return 4; //baris pertama yang di skip karena tidak ada data
     }
 }

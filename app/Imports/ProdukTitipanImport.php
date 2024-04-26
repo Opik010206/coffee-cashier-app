@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\ProdukTitipan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ProdukTitipanImport implements ToModel
+class ProdukTitipanImport implements ToModel, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -15,12 +16,17 @@ class ProdukTitipanImport implements ToModel
     public function model(array $row)
     {
         return new ProdukTitipan([
-            'nama_produk' => $row[1],
-            'nama_supplier' => $row[2],
-            'harga_beli' => $row[3],
-            'harga_jual' => $row[4],
-            'stock' => $row[5],
-            'keterangan' => $row[6],
+            'nama_produk' => $row['nama_produk'],
+            'nama_supplier' => $row['nama_suplier'],
+            'harga_beli' => $row['harga_beli'],
+            'harga_jual' => $row['harga_jual'],
+            'stock' => $row['stock'],
+            'keterangan' => $row['keterangan'],
         ]);
+    }
+
+    public function headingRow(): int
+    {
+        return 4;
     }
 }

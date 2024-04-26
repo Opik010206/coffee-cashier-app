@@ -3,18 +3,18 @@
     <div class="row align-items-center justify-content-between px-4">
       <a href="/pemesanan" class="btn btn-outline-primary btn-sm nav-link {{ Request::is('/pemesanan') ? 'active' : '' }}">All</a>
       @foreach ($jenis as $j)
-        <a href="/jenis/{{ $j->id }}" class="btn btn-outline-primary btn-sm nav-link mt-2{{ Request::is('jenis/'. $j->id) ? 'active' : '' }}">
+        {{-- <a href="jenis/{{ $j->id }}" data-id="{{ $j->id }}" class="jenis-button btn btn-outline-primary btn-sm nav-link mt-2{{ Request::is('jenis/'. $j->id) ? 'active' : '' }}">
           {{ $j->nama }}
-        </a>
+        </a> --}}
 
-        {{-- <button class="jenis-button btn btn-outline-primary btn-sm" data-id="{{ $j->id }}">
+        <button class="jenis-button btn btn-outline-primary btn-sm" data-id="{{ $j->id }}" data-menu="{{ $j->menu }}">
           {{ $j->nama }}
-        </button> --}}
+        </button>
 
       @endforeach
     </div>
   </div>
-  <div class=" mx-0 my-3 px-3">
+  <div class=" mx-0 my-3 px-3" id="menu-container">
     <div class="row row-col-4">
     {{-- @foreach ($jenis as $j) --}}
       @foreach ($menus as $menu)
@@ -27,11 +27,13 @@
           {{-- <div class="menu" data-id="{{ $menu->id }}" data-harga="{{ $menu->harga }}">
           </div> --}}
         </div>
+        
       @endforeach
     {{-- @endforeach --}}
     </div>
   </div>
 </div>
+
 
 
 <!-- Contoh elemen HTML dengan atribut data -->
@@ -94,25 +96,38 @@
     //     // console.log('halo')
     //   })
     // })
-
+    
     // Fungsi Jenis
-    // $(function(){
-    //   $('.jenis-button').click(function() {
-    //       const jenisId = $(this).data('id');
-    //       // console.log(jenisId)
-    //       $.ajax({
-    //           url: '/jenis/' + jenisId,
-    //           method: 'GET',
-    //           success: function(response) {
-    //               // Memuat konten yang dimuat dalam div atau elemen lain
-    //               $('#menu-container').html(response);
-    //           },
-    //           error: function(xhr, status, error) {
-    //               console.error(error);
-    //           }
-    //       });
-    //   });
-    // })
+    $(function(){
+      $('.jenis-button').click(function() {
+          const jenisId = $(this).data('id');
+          const menu = $(this).data('menu');
+          let nama_menu = $(this).data('nama');
+
+          let conten = `<div class="col bg-light rounded mx-1 my-2 menu-item" data-id="{{ $menu->id }}" data-nama="{{ $menu->nama }}" data-harga="{{ $menu->harga }}" data-jenis_id="{{ $menu->jenis_id }}">
+          <div class="d-flex flex-column align-items-center justify-content-between" style="height: 100%;">
+            <img src="{{ asset('storage/' . $menu->image) }}" class="ms-auto mt-2" alt="" style="width: 80px;">
+            <h5 class="text-center mt-3 menu">{{ $menu->nama }}</h5>
+            <p class="text-center">Rp. {{ $menu->harga }}</p>
+          </div>
+        </div>`;
+          // console.log(jenisId)
+          $.ajax({
+              url: '/jenis/' + jenisId,
+              method: 'GET',
+              success: function(response) {
+                  // Memuat konten yang dimuat dalam div atau elemen lain
+                  // $('#menu-container').reload();
+                  console.log(menu)
+                  // $('#menu-container').html(menu['nama'])
+                  $('#menu-container').html(conten)
+              },
+              error: function(xhr, status, error) {
+                  console.error(error);
+              }
+          });
+      });
+    })
 
     // Fungsi menu
     $(function(){

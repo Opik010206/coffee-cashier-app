@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/', [HomeController::class, 'dashboard']);
     Route::get('/about', [HomeController::class, 'about']);
+    Route::get('/contact_us', [HomeController::class, 'contact']);
     
     // Route Admin
     Route::group(['middleware' => ['userLogin:3']], function(){
@@ -70,10 +71,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
         Route::post('/karyawan/import', [KaryawanController::class, 'import'])->name('import_karyawan');
 
-        // Karyawan
+        // Absensi Karyawan
         Route::resource('/absensi', AbsensiController::class);
         Route::get('/absensi/export/excel', [AbsensiController::class, 'export']);
         Route::post('/absensi/import', [AbsensiController::class, 'import'])->name('import_absensi');
+        Route::get('/generate-pdf', [AbsensiController::class,'generatePdf'])->name('generate-pdf');
         
         // Produk Titipan
         Route::resource('/produk_titipan', ProdukTitipanController::class);
@@ -84,6 +86,9 @@ Route::group(['middleware' => 'auth'], function(){
 
     // Route untuk kasir
     Route::group(['middleware' => ['userLogin:2']], function(){
+        
+        // Route::resource('/menu', MenuController::class);
+        // Route::resource('/jenis', JenisController::class);
         Route::resource('/pemesanan', PemesananController::class);
         // Route::get('/jenis/{jenis}', [JenisController::class, 'show']);
         Route::resource('/transaksi', TransaksiController::class);
