@@ -64,11 +64,21 @@ class AbsensiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAbsensiRequest $request, Absensi $absensi)
+    public function updateStatus(UpdateAbsensiRequest $request, Absensi $absensi)
     {
+        // dd($request);
         $absensi->update($request->all());
         return response()->json(['result' => $absensi]);
         // return redirect('absensi')->with('success', 'Data berhasil ditambahkan');
+
+    }
+
+    public function update(UpdateAbsensiRequest $request, Absensi $absensi)
+    {
+        // dd($request);
+        $absensi->update($request->all());
+        // return response()->json(['result' => $absensi]);
+        return redirect('absensi')->with('success', 'Data berhasil ditambahkan');
 
     }
 

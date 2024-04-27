@@ -18,19 +18,19 @@
                       <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan">
                     </div>
                 </div>
-                <div class="mb-3 row">
+                <div class="mb-3 row hapus-colom">
                     <label for="tanggal_masuk" class="col-sm-3 col-form-label">Tanggal Masuk</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk">
                     </div>
                 </div>
-                <div class="mb-3 row">
+                <div class="mb-3 row hapus-colom">
                     <label for="waktu_masuk" class="col-sm-3 col-form-label">Waktu Masuk</label>
                     <div class="col-sm-9">
                       <input type="time" class="form-control" id="waktu_masuk" name="waktu_masuk">
                     </div>
                 </div>
-                <div class="mb-3 row">
+                <div class="mb-3 row hapus-colom">
                     <label for="status" class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-9">
                       {{-- <input type="text" class="form-control" id="status" name="status"> --}}
@@ -40,12 +40,6 @@
                         <option value="sakit" id="sakit">Sakit</option>
                         <option value="cuti" id="cuti">Cuti</option>
                       </select>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="waktu_keluar" class="col-sm-3 col-form-label">Waktu Keluar</label>
-                    <div class="col-sm-9">
-                      <input type="time" class="form-control" id="waktu_keluar" name="waktu_keluar">
                     </div>
                 </div>
             </div>

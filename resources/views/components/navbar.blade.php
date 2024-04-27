@@ -26,6 +26,8 @@
             <i class="icon-bell mx-0"></i>
             <span class="count"></span>
           </a>
+
+        @if (Auth::check() && Auth::user()->level == 3)
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
             <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
             <a class="dropdown-item preview-item">
@@ -68,10 +70,31 @@
               </div>
             </a>
           </div>
+        @endif
+
+        @if (Auth::check() && Auth::user()->level == 2)
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-success">
+                  <i class="ti-info-alt mx-0"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                <h6 class="preview-subject font-weight-normal">Halo Kasir</h6>
+                <p class="font-weight-light small-text mb-0 text-muted">
+                  Just now
+                </p>
+              </div>
+            </a>
+        </div>
+        @endif
+
         </li>
         <li class="nav-item nav-profile dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-            <img src="{{ asset('assets') }}/images/faces/face28.jpg" alt="profile"/>
+            <img src="{{ asset('assets') }}/images/faces/foto1.jpg" alt="profile"/>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
             <a class="dropdown-item">

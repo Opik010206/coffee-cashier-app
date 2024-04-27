@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
             $table->string('nama_karyawan');
-            $table->date('tanggal_masuk');
-            $table->time('waktu_masuk')->useCurrent();
-            $table->enum('status', ['masuk', 'sakit', 'cuti']);
-            $table->timestamp('waktu_keluar')->useCurrent();
+            $table->date('tanggal_masuk')->nullable();
+            $table->time('waktu_masuk')->nullable();
+            $table->enum('status', ['masuk', 'sakit', 'cuti'])->nullable();
+            $table->time('waktu_keluar')->nullable();
             $table->timestamps();
         });
     }

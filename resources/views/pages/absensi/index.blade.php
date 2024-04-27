@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">Absensi Kerja Karyawan</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">Halaman ini untuk mengelola data absensi kerja karyawan yang ada di restoran <span class="text-primary">Coffee Cashier</span></h6>
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@
 
           @if ($errors->any())
             <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+              <strong>Peringatan!</strong> Ada data yang belum di isi, yakni :
               <ul>
                 @foreach ($errors->all() as $error)
                     <li>Data {{ $error }} absensi belum di isi</li>
@@ -44,19 +44,24 @@
             </div>  
           @endif
 
-          <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal">Tambah Data</a>
-
+        @if (Auth::check() && Auth::user()->level == 3)
+          <a href="#" class="btn btn-primary mb-3 ti-plus" data-toggle="modal" data-target="#modal"> Tambah Data</a>
+        @endif
           {{-- Export --}}
-          <a href="/absensi/export/excel" class="btn btn-success mb-3">Export Excel</a>
+          <a href="/absensi/export/excel" class="btn btn-success mb-3 ti-export"> Export Excel</a>
           {{-- Import --}}
-          <a href="#" class="btn btn-warning mb-3" data-toggle="modal" data-target="#import">Import Excel</a>
+          <a href="#" class="btn btn-warning mb-3 ti-import" data-toggle="modal" data-target="#import"> Import Excel</a>
           {{-- PDF --}}
-          <a href="{{ route('generate-pdf') }}" class="btn btn-info mb-3">Export PDF</a>
+          <a href="{{ route('generate-pdf') }}" class="btn btn-info mb-3 ti-printer"> Export PDF</a>
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
-              <div class="card p-4">
-                @include('pages.absensi.data')
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    @include('pages.absensi.data')
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -146,6 +151,7 @@
         modal.find('#waktu_masuk').val(waktu_masuk);
         modal.find('#status').val(status);
         modal.find('#waktu_keluar').val(waktu_keluar);
+        modal.find('.hapus-colom').addClass('d-none');
         let halo = modal.find('.form').attr('action', '{{ url("absensi") }}/'+id);
         modal.find('#simpan').text('Simpan Perubahan');
         modal.find('#method').html('@method("PATCH")');
@@ -153,6 +159,7 @@
       }else{
         modal.find('.modal-title').text('Tambah Data');
         modal.find('#nama_karyawan').val('');
+        modal.find('.d-none').removeClass();
         modal.find('.form').attr('action', 'absensi');
         modal.find('#simpan').text('Simpan');
         modal.find('#method').html('');

@@ -33,6 +33,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [HomeController::class, 'dashboard']);
     Route::get('/about', [HomeController::class, 'about']);
     Route::get('/contact_us', [HomeController::class, 'contact']);
+
+    // Absensi Karyawan
+    Route::resource('/absensi', AbsensiController::class);
+    Route::get('/absensi/export/excel', [AbsensiController::class, 'export']);
+    Route::put('/absensi/{absensi}', [AbsensiController::class, 'updateStatus']);
+    Route::post('/absensi/import', [AbsensiController::class, 'import'])->name('import_absensi');
+    Route::get('/generate-pdf', [AbsensiController::class,'generatePdf'])->name('generate-pdf');
     
     // Route Admin
     Route::group(['middleware' => ['userLogin:3']], function(){
@@ -70,12 +77,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('/karyawan', KaryawanController::class);
         Route::get('/karyawan/export/excel', [KaryawanController::class, 'export']);
         Route::post('/karyawan/import', [KaryawanController::class, 'import'])->name('import_karyawan');
-
-        // Absensi Karyawan
-        Route::resource('/absensi', AbsensiController::class);
-        Route::get('/absensi/export/excel', [AbsensiController::class, 'export']);
-        Route::post('/absensi/import', [AbsensiController::class, 'import'])->name('import_absensi');
-        Route::get('/generate-pdf', [AbsensiController::class,'generatePdf'])->name('generate-pdf');
         
         // Produk Titipan
         Route::resource('/produk_titipan', ProdukTitipanController::class);

@@ -30,7 +30,7 @@ class StoreMejaRequest extends FormRequest
     public function messages()
     {
         return [
-            'no_meja.required' => 'nomor meja',
+            'no_meja.required' => 'nomor',
             'kapasitas.required' => 'kapasitas',
             'status.required' => 'status',
         ];

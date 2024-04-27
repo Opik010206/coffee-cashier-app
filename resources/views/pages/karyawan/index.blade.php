@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">Karyawan Pages</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <h6 class="font-weight-normal mb-0">Halaman ini untuk mengelola data karyawan yang ada di restoran <span class="text-primary">Coffee Cashier</span></h6>
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@
 
           @if ($errors->any())
             <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+              <strong>Peringatan!</strong> Ada data yang belum di isi, yakni :
               <ul>
                 @foreach ($errors->all() as $error)
                     <li>Data {{ $error }} karyawan belum di isi</li>
@@ -44,17 +44,21 @@
             </div>  
           @endif
 
-          <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal">Tambah Data</a>
+          <a href="#" class="btn btn-primary mb-3 ti-plus" data-toggle="modal" data-target="#modal"> Tambah Data</a>
 
           {{-- Export --}}
-          <a href="/karyawan/export/excel" class="btn btn-success mb-3">Export Excel</a>
+          <a href="/karyawan/export/excel" class="btn btn-success mb-3 ti-export"> Export Excel</a>
           {{-- Import --}}
-          <a href="#" class="btn btn-warning mb-3" data-toggle="modal" data-target="#import">Import Excel</a>
+          <a href="#" class="btn btn-warning mb-3 ti-import" data-toggle="modal" data-target="#import"> Import Excel</a>
 
           <div class="row">
             <div class="col-md grid-margin stretch-card">
-              <div class="card p-4">
-                @include('pages.karyawan.data')
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    @include('pages.karyawan.data')
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -8,50 +8,47 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">
-          <i class="icon-grid menu-icon "></i>
+          <i class="ti-info-alt menu-icon "></i>
           <span class="menu-title">About</span>
         </a>
       </li>
+
+      {{-- Login Sebagai Admin --}}
+      @if (Auth::check() && Auth::user()->level == 3)
       <li class="nav-item">
         <a class="nav-link" href="/category">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-package menu-icon"></i>
           <span class="menu-title">Category</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/jenis">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-tag menu-icon"></i>
           <span class="menu-title">Jenis</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/menu">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-layout-list-thumb menu-icon"></i>
           <span class="menu-title">Menu</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/stock">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-clipboard menu-icon"></i>
           <span class="menu-title">Stok</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/meja">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-archive menu-icon"></i>
           <span class="menu-title">Meja</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/pelanggan">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-face-smile menu-icon"></i>
           <span class="menu-title">Pelanggan</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/pemesanan">
-          <i class="icon-grid menu-icon"></i>
-          <span class="menu-title">Pemesanan</span>
         </a>
       </li>
       {{-- <li class="nav-item">
@@ -82,31 +79,45 @@
       </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="/karyawan">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-themify-favicon menu-icon"></i>
           <span class="menu-title">Karyawan</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/produk_titipan">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-shopping-cart-full menu-icon"></i>
           <span class="menu-title">Produk Titipan</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="data">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-write menu-icon"></i>
           <span class="menu-title">Data Produk</span>
         </a>
       </li>
+      @endif
+
+
+      {{-- Login Sebagai Kasir --}}
+      @if (Auth::check() && Auth::user()->level == 2)
+      <li class="nav-item">
+        <a class="nav-link" href="/pemesanan">
+          <i class="ti-receipt menu-icon"></i>
+          <span class="menu-title">Pemesanan</span>
+        </a>
+      </li>
+      @endif
+
+
       <li class="nav-item">
         <a class="nav-link" href="/absensi">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti-check-box menu-icon"></i>
           <span class="menu-title">Absensi Karyawan</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/contact_us">
-          <i class="icon-grid menu-icon"></i>
+          <i class="ti ti-headphone-alt menu-icon"></i>
           <span class="menu-title">Contact Us</span>
         </a>
       </li>

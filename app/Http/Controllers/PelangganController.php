@@ -17,7 +17,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $data['pelanggan'] = Pelanggan::get();
+        $data['pelanggan'] = Pelanggan::latest()->get();
         return view('pages.pelanggan.index')->with($data);
     }
 

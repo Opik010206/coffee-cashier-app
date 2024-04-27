@@ -23,9 +23,9 @@ class StoreAbsensiRequest extends FormRequest
     {
         return [
             'nama_karyawan' => 'required',
-            'tanggal_masuk' => 'required',
+            // 'tanggal_masuk' => 'required',
             // 'waktu_masuk' => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
             // 'waktu_keluar' => 'required',
         ];
     }
