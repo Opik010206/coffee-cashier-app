@@ -26,7 +26,7 @@
         @foreach ($absensi as $c)
             <tr>
                 <td>{{ $i = (!isset($i)?1:++$i) }}</td>
-                <td class="py-1">{{ $c->nama_karyawan }}</td>
+                <td class="py-1">{{ $c->karyawan->nama }}</td>
 
                 @if (Auth::check() && Auth::user()->level == 3)
                 <td class="py-1">
@@ -42,26 +42,52 @@
                 </td>
                 @endif
 
-                <td class="py-1">{{ $c->tanggal_masuk }}</td>
-                <td class="py-1">{{ $c->waktu_masuk }}</td>
+                @if($c->status == 'masuk' || $c->status == null)
+                    <td class="py-1 tanggal-masuk">{{ $c->tanggal_masuk }}</td>
+                @else
+                    <td class="py-1">Tidak Masuk</td>
+                @endif
+                
+                @if($c->status == 'masuk' || $c->status == null)
+                    <td class="py-1 waktu-masuk">{{ $c->waktu_masuk }}</td>
+                @else
+                    <td class="py-1">00:00:00</td>
+                @endif
                 
                 @if (Auth::check() && Auth::user()->level == 2)
-                <td class="py-1">
-                    <select class="form-control col-sm edit-status" data-id="{{ $c->id }}" name="status" id="status">
-                        <option value="masuk" selected>Pilih</option>
-                        <option value="masuk" {{ $c->status === 'masuk' ? 'selected' : '' }}>Masuk</option>
-                        <option value="sakit" {{ $c->status === 'sakit' ? 'selected' : '' }}>Sakit</option>
-                        <option value="cuti" {{ $c->status === 'cuti' ? 'selected' : '' }}>Cuti</option>
-                    </select>
-                </td>
-                <td class="py-1">
-                    <button class="btn btn-info py-2 btn-selesai" data-id="{{ $c->id }}">Selesai</button>    
-                    <input disabled class="waktu-keluar d-none" value="{{ $c->waktu_keluar }}" name="waktu_keluar" id="waktu_keluar" style="width: 70px; border: none;">
-                </td>
+                    <td class="py-1">
+                        <select class="form-control col-sm edit-status" data-id="{{ $c->id }}" name="status" id="status">
+                            <option value="masuk" selected>Pilih</option>
+                            <option value="masuk" {{ $c->status === 'masuk' ? 'selected' : '' }}>Masuk</option>
+                            <option value="sakit" {{ $c->status === 'sakit' ? 'selected' : '' }}>Sakit</option>
+                            <option value="cuti" {{ $c->status === 'cuti' ? 'selected' : '' }}>Cuti</option>
+                        </select>
+                    </td>
+
+                    @if($c->status == 'masuk')
+                        <td class="py-1">
+                            <button class="btn btn-info py-2 btn-selesai selesai-{{ $c->id }}" data-id="{{ $c->id }}">Selesai</button>
+                            <input disabled class="waktu-keluar-{{ $c->id }} d-none" value="{{ $c->waktu_keluar }}" name="waktu_keluar" id="waktu_keluar" style="width: 70px; border: none;">
+                        </td>
+                    @elseif($c->status == null)
+                        <td class="py-1"></td>
+                    @else
+                        <td class="py-1">00:00:00</td>
+                    @endif
                 @endif
 
                 @if (Auth::check() && Auth::user()->level == 3)
-                <td class="py-1">{{ $c->waktu_keluar }}</td>
+                    @if($c->status == 'masuk')
+                        @if ($c->waktu_keluar == null)
+                            <td class="py-1 text-info">Belum Kelar</td>
+                        @else
+                            <td class="py-1">{{ $c->waktu_keluar }}</td>
+                        @endif
+                    @elseif($c->status == null)
+                        <td class="py-1"></td>
+                    @else
+                        <td class="py-1">00:00:00</td>
+                    @endif
                 @endif
 
                 @if (Auth::check() && Auth::user()->level == 3)

@@ -41,7 +41,7 @@ class StoreKaryawanRequest extends FormRequest
         return [
             'nip.required' => 'nip',
             'nik.required' => 'nik',
-            'nama.required' => 'tanggal',
+            'nama.required' => 'nama',
             'jenis_kelamin.required' => 'jenis kelamin',
             'tempat_lahir.required' => 'tempal lahir',
             'tanggal_lahir.required' => 'tanggal lahir',

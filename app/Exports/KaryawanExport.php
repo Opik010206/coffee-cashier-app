@@ -70,9 +70,9 @@ class KaryawanExport implements FromCollection, WithHeadings, ShouldAutoSize, Wi
     {
         return [
             'ID',
+            'Nama Karyawan',
             'NIP',
             'NIK',
-            'Nama Karyawan',
             'Jenis Kelamin',
             'Tempat Lahir',
             'Tanggal Lahir',

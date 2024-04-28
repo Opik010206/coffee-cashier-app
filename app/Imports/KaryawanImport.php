@@ -15,9 +15,9 @@ class KaryawanImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Karyawan([
+            'nama' => $row['nama_karyawan'],
             'nip' => $row['nip'],
             'nik' => $row['nik'],
-            'nama' => $row['nama_karyawan'],
             'jenis_kelamin' => $row['jenis_kelamin'],
             'tempat_lahir' => $row['tempat_lahir'],
             'tanggal_lahir' => $row['tanggal_lahir'],

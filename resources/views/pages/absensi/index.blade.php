@@ -166,42 +166,90 @@
       }
     })
 
-    // Edit Status
-    $('.edit-status').change(function(e){
-      let id = $(this).attr('data-id');
-      let status = $(this).val();
-      $.ajax({
-        url: 'absensi/' + id,
-        type: 'PUT',
-        data: {
-          status: status,
-          // Menyertakan token CSRF dari meta tag
-          _token: $('meta[name="csrf-token"]').attr('content'),
-        },
-        success:function(response) {
-          console.log(response.result.status);
-          // Reload halaman setelah permintaan AJAX berhasil
-          location.reload();
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
-            alert('Gagal memperbarui status.');
-        }
-      })
-    })
-
-    // Absensi Selesai / Waktu Keluar
+    // JQUERY
     $(document).ready(function(){
+
+      // Edit Status
+      $('.edit-status').change(function(e){
+        let id = $(this).attr('data-id');
+        let status = $(this).val();
+
+        let waktu = new Date(); // Dapatkan waktu saat status diganti
+
+        let tanggal = waktu.getDate();
+        let bulan = waktu.getMonth() + 1; // Tambah 1 karena indeks bulan dimulai dari 0
+        let tahun = waktu.getFullYear();
+
+        let jam = waktu.getHours();
+        let menit = waktu.getMinutes();
+        let detik = waktu.getSeconds();
+
+        // Format waktu ke dalam string dengan menambahkan nol di depan jika angka kurang dari 10
+        let waktuMasuk = jam.toString().padStart(2, '0') + ':' + 
+                            menit.toString().padStart(2, '0') + ':' + 
+                            detik.toString().padStart(2, '0');
+
+        let tanggalMasuk = `${tahun}-${bulan}-${tanggal}`;
+        let waktuKeluar = null;
+
+        // Temukan elemen waktu masuk di baris yang sesuai dengan tombol yang diklik
+        // let waktuMasukElement = $(this).closest('tr').find(`.waktu-masuk`);
+
+        // Perbarui teks waktu masuk dengan waktu
+        // waktuMasukElement.text(waktuMasuk);
+
+        if(status == 'masuk'){
+          localStorage.removeItem(id)
+          waktuMasuk
+          tanggalMasuk
+          waktuKeluar
+        }else{
+          waktuMasuk = '00:00:00';
+          tanggalMasuk = null;
+          waktuKeluar = '00:00:00'
+        }
+
+        $.ajax({
+          url: 'absensi/' + id,
+          type: 'PUT',
+          data: {
+            status: status,
+            waktu_masuk: waktuMasuk,
+            waktu_keluar: waktuKeluar,
+            tanggal_masuk: tanggalMasuk,
+            // Menyertakan token CSRF dari meta tag
+            _token: $('meta[name="csrf-token"]').attr('content'),
+          },
+          success:function(response) {
+            console.log(response.result.status);
+            // console.log(waktuMasuk)
+
+            // Reload halaman setelah permintaan AJAX berhasil
+            location.reload();
+          },
+          error: function(xhr, status, error) {
+              console.error(error);
+              alert('Gagal memperbarui status.');
+          }
+        })
+      })
+
+
       // Memeriksa status tombol saat halaman dimuat
-      var statusSelesai = localStorage.getItem('status_selesai');
-      if (statusSelesai === 'true') {
-          $('.waktu-keluar').removeClass('d-none'); // Menampilkan waktu keluar
-          $('.btn-selesai').hide(); // Sembunyikan tombol "Selesai"
-      }
+      $('.btn-selesai').each(function() {
+        let btnId = $(this).attr('data-id');
+        let statusSelesai = localStorage.getItem(btnId);
+        if (statusSelesai === 'true') {
+            $(`.waktu-keluar-${btnId}`).removeClass('d-none'); // Menampilkan waktu keluar sesuai id
+            $(`.selesai-${btnId}`).hide(); // Sembunyikan tombol "Selesai" sesuai id
+        }
+      });
 
       // Menyimpan status tombol saat diklik
       $('body').on('click', '.btn-selesai', function(){
-        localStorage.setItem('status_selesai', 'true');
+        let btnId = $(this).attr('data-id');
+        localStorage.setItem(btnId, 'true');
+
         let waktu = new Date(); // Dapatkan waktu saat tombol diklik
         let jam = waktu.getHours();
         let menit = waktu.getMinutes();
@@ -213,7 +261,7 @@
                             detik.toString().padStart(2, '0');
 
         // Temukan elemen waktu keluar di baris yang sesuai dengan tombol yang diklik
-        let waktuKeluarElement = $(this).closest('tr').find('.waktu-keluar');
+        let waktuKeluarElement = $(this).closest('tr').find(`.waktu-keluar-${btnId}`);
 
         // Perbarui teks waktu keluar dengan waktu selesai
         // console.log(waktuSelesai)

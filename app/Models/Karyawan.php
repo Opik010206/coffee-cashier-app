@@ -12,4 +12,8 @@ class Karyawan extends Model
     public $table = 'karyawans';
 
     public $guarded = ['id'];
+
+    public function absensi(){
+        return $this->hasMany(Absensi::class);
+    }
 }

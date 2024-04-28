@@ -22,7 +22,7 @@ class StoreAbsensiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_karyawan' => 'required',
+            'karyawan_id' => 'required',
             // 'tanggal_masuk' => 'required',
             // 'waktu_masuk' => 'required',
             // 'status' => 'required',
@@ -32,7 +32,7 @@ class StoreAbsensiRequest extends FormRequest
     public function messages()
     {
         return [
-            'nama_karyawan.required' => 'nama karyawan',
+            'karyawan_id.required' => 'nama karyawan',
             'tanggal_masuk.required' => 'tanggal masuk',
             'waktu_masuk.required' => 'waktu masuk',
             'status.required' => 'status',

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 100);
             $table->string('nip', 12);
             $table->string('nik', 12);
-            $table->string('nama', 100);
             $table->enum('jenis_kelamin', ['pria','wanita']);
             $table->string('tempat_lahir', 100);
             $table->date('tanggal_lahir');

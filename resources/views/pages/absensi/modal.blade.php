@@ -15,7 +15,13 @@
                 <div class="mb-3 row">
                     <label for="nama_karyawan" class="col-sm-3 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan">
+                      <select class="form-control" name="karyawan_id" id="karyawan_id">
+                        <option selected disabled>Pilih Nama Karyawan</option>
+                        @foreach ($karyawan as $j => $nama)
+                            <option value="{{ $j }}">{{ $nama }}</option>
+                        @endforeach
+                      </select>
+                      {{-- <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan"> --}}
                     </div>
                 </div>
                 <div class="mb-3 row hapus-colom">

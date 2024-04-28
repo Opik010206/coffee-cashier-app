@@ -14,9 +14,9 @@ class KaryawanSeeder extends Seeder
     public function run(): void
     {
         Karyawan::create([
+            'nama' => 'Evelina Nigela',
             'nip' => '200938400232',
             'nik' => '210197400882',
-            'nama' => 'Evelina Nigela',
             'jenis_kelamin' => 'wanita',
             'tempat_lahir' => 'Cianjur',
             'tanggal_lahir' => '2010-08-23',
@@ -51,6 +51,19 @@ class KaryawanSeeder extends Seeder
             'status_nikah' => 'nikah',
             'alamat' => 'Jl.Krespo No.032',
             'foto' => 'karyawan/sintayong.jpeg',
+        ]);
+        Karyawan::create([
+            'nip' => '200938400232',
+            'nik' => '210197400882',
+            'nama' => 'Dion Zyan',
+            'jenis_kelamin' => 'pria',
+            'tempat_lahir' => 'Cianjur',
+            'tanggal_lahir' => '1990-08-23',
+            'no_telp' => '082347659320',
+            'agama' => 'Islam',
+            'status_nikah' => 'belum_nikah',
+            'alamat' => 'Jl.Gunteng No.032',
+            'foto' => 'karyawan/Leonardo.jpg',
         ]);
     }
 }

@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_karyawan');
+
+            $table->unsignedBigInteger('karyawan_id');
+            $table->foreign('karyawan_id')->references('id')->on('karyawans')->onDelete('cascade');
+
             $table->date('tanggal_masuk')->nullable();
             $table->time('waktu_masuk')->nullable();
             $table->enum('status', ['masuk', 'sakit', 'cuti'])->nullable();

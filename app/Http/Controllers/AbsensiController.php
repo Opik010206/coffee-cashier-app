@@ -7,6 +7,7 @@ use App\Models\Absensi;
 use App\Http\Requests\StoreAbsensiRequest;
 use App\Http\Requests\UpdateAbsensiRequest;
 use App\Imports\AbsensiImport;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Dompdf;
@@ -19,8 +20,10 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $absensi = Absensi::all();
-        return view('pages.absensi.index', compact('absensi'));
+        $absensi = Absensi::with(['karyawan'])->latest()->get();
+        // $absensi = Absensi::get();
+        $karyawan = Karyawan::pluck('nama', 'id');
+        return view('pages.absensi.index', compact('absensi', 'karyawan'));
     }
 
     /**
