@@ -27,7 +27,12 @@
                 <div class="mb-3 row">
                     <label for="status" class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="status" name="status">
+                      <select class="form-control col-sm" name="status" id="status">
+                        <option selected disabled>Pilih Status</option>
+                        <option value="terpenuhi" id="terpenuhi">Terpenuhi</option>
+                        <option value="kosong" id="kosong">Kosong</option>
+                      </select>
+                      {{-- <input type="text" class="form-control" id="status" name="status"> --}}
                     </div>
                 </div>
             </div>

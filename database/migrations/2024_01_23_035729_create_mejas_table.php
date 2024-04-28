@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('no_meja');
             $table->integer('kapasitas');
-            $table->string('status');
+            $table->enum('status', ['terpenuhi', 'kosong']);
             $table->timestamps();
         });
     }

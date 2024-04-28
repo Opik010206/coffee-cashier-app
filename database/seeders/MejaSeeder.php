@@ -16,7 +16,7 @@ class MejaSeeder extends Seeder
         Meja::create([
             'no_meja' => 19,
             'kapasitas' => 5,
-            'status' => 'terpenuhi'
+            'status' => 'kosong'
         ]);
         Meja::create([
             'no_meja' => 5,
