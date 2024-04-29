@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('menu_id');
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->integer('jumlah');
-            $table->decimal('subtotal', 10, 2);
+            $table->string('subtotal');
 
 
             $table->timestamps();

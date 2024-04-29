@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMenuRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MenuImport;
 use App\Models\Jenis;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,6 @@ class MenuController extends Controller
         // $data['menu'] = Menu::get();
         $menu = Menu::with(['jenis'])->latest()->get();
         $jenis = Jenis::pluck('nama', 'id');
-        // dd($menu);
         return view('pages.menu.index', compact('menu', 'jenis'));
     }
 

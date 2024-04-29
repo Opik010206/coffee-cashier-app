@@ -37,8 +37,14 @@ class TransaksiController extends Controller
         try {
             DB::beginTransaction();
             // $validated = $request->validate();
-            $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
-            $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id->id, 8,4)+1);
+            // Ambil ID terakhir dari transaksi
+            $last_id = Transaksi::latest()->first();
+
+            // Ambil tanggal hari ini
+            $tanggal_hari_ini = date('Ymd');
+
+            // Buat nomor transaksi baru
+            $notrans = $last_id ? $tanggal_hari_ini . sprintf('%04d', intval(substr($last_id->id, -4)) + 1) : $tanggal_hari_ini . '0001';
 
             // dd($notrans);
     
