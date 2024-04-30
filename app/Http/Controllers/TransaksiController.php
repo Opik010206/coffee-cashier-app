@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Http\Requests\TransaksiRequest;
 use App\Models\DetailTransaksi;
+use App\Models\Menu;
+use App\Models\Stock;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +68,18 @@ class TransaksiController extends Controller
                     'jumlah' => $detail['qty'],
                     'subtotal' => $detail['harga'] * $detail['qty']
                 ]);
+            }
+
+            // dd($request['jumlah']);
+
+            // Kurangi stok pada tabel stok
+            foreach ($request->orderedList as $detail) {
+                $stok = Stock::where('menu_id', $detail['menu_id'])->first();
+                if ($stok) {
+                    $stok->update([
+                        'jumlah' => $stok->jumlah - $detail['qty']
+                    ]);
+                }
             }
 
             DB::commit();

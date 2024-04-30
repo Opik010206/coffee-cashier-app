@@ -34,5 +34,19 @@ class MenuSeeder extends Seeder
             'deskripsi' => 'Dimsum mirip seperti telur ayam',
             'jenis_id' => 1
         ]);
+        Menu::create([
+            'nama' => 'Dimsum Jeletot',
+            'harga' => 10000,
+            'image' => 'menu/dimsum3.png',
+            'deskripsi' => 'Dimsum yang rasanya pedas hot',
+            'jenis_id' => 1
+        ]);
+        Menu::create([
+            'nama' => 'Dimsum Siomay',
+            'harga' => 8500,
+            'image' => 'menu/dimsum4.png',
+            'deskripsi' => 'Dimsum nikmat seperti siomay',
+            'jenis_id' => 1
+        ]);
     }
 }

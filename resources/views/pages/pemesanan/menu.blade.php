@@ -7,9 +7,8 @@
           {{ $j->nama }}
         </a> --}}
 
-        <button class="jenis-button btn btn-outline-primary btn-sm" data-id="{{ $j->id }}" data-menu="{{ $j->menu }}">
-          {{ $j->nama }}
-        </button>
+        <button c
+        
 
       @endforeach
     </div>
@@ -47,6 +46,7 @@
 
 @push('script')
   <script>
+    
     // let tagId = $('.id');
     // let tagName = $('.name');
     // let tagAge = $('.age');

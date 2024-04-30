@@ -1,7 +1,7 @@
 <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="{{ asset('assets') }}/images/logo.svg" class="mr-2" alt="logo"/></a>
+      <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset('assets') }}/images/logo2.svg" class="mr-2" alt="logo"/></a>
       <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('assets') }}/images/logo-mini.svg" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -56,16 +56,16 @@
                 </p>
               </div>
             </a>
-            <a class="dropdown-item preview-item">
+            <a class="dropdown-item preview-item" href="/karyawan">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-info">
                   <i class="ti-user mx-0"></i>
                 </div>
               </div>
               <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                <h6 class="preview-subject font-weight-normal">Karyawan Baru</h6>
                 <p class="font-weight-light small-text mb-0 text-muted">
-                  2 days ago
+                  5 karyawan
                 </p>
               </div>
             </a>
@@ -75,14 +75,14 @@
         @if (Auth::check() && Auth::user()->level == 2)
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
             <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-            <a class="dropdown-item preview-item">
+            <a class="dropdown-item preview-item" href="/absensi">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-success">
                   <i class="ti-info-alt mx-0"></i>
                 </div>
               </div>
               <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">Halo Kasir</h6>
+                <h6 class="preview-subject font-weight-normal">Peringatan Absensi</h6>
                 <p class="font-weight-light small-text mb-0 text-muted">
                   Just now
                 </p>

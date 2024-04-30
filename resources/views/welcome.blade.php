@@ -82,8 +82,8 @@
   <script src="{{ asset('assets') }}/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="{{ asset('assets') }}/js/dashboard.js"></script>
-  <script src="{{ asset('assets') }}/js/Chart.roundedBarCharts.js"></script>
+  <script src="{{ asset('assets') }}/chart.js"></script>
+  {{-- <script src="{{ asset('assets') }}/js/Chart.roundedBarCharts.js"></script> --}}
   <!-- End custom js for this page-->
 
   {{-- Bootsrapt 5 --}}

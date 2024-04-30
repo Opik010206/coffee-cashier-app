@@ -13,15 +13,15 @@
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
-                <div class="col-12 col-xl-10 mb-4 mb-xl-0">
+                <div class="col-12 col-lg-9 mb-4 mb-lg-0">
                   <h3 class="font-weight-bold">Welcome {{ $user->name }}
                   </h3>
                   <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
-                <div class="col- col-xl-2">
+                <div class="col-6 col-md-3 col-sm-4 col-lg-3">
                  <div class="justify-content-end d-flex">
-                  <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk">
-                  {{-- <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                  {{-- <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk"> --}}
+                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                     <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                      <i class="mdi mdi-calendar"></i> 22 April 2024 - 26 April 2024
                     </button>
@@ -31,7 +31,7 @@
                       <a class="dropdown-item" href="#">June - August</a>
                       <a class="dropdown-item" href="#">August - November</a>
                     </div>
-                  </div> --}}
+                  </div>
                  </div>
                 </div>
               </div>
@@ -42,8 +42,8 @@
             {{-- Image --}}
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
-                <div class="card-people mt-auto">
-                  <img src="{{ asset('assets') }}/images/dashboard/people.svg" alt="people">
+                <div class="card-people mt-auto p-0">
+                  <img src="{{ asset('assets') }}/images/dashboard/people1.svg" alt="people">
                   <div class="weather-info">
 
                   </div>
@@ -54,22 +54,13 @@
             {{-- Data --}}
             <div class="col-md-6 grid-margin transparent">
               <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
+                <div class="col-md-12 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body text-center">
                       <p class="mb-4">Jumlah Transaksi</p>
                       <p class="fs-30 mb-2">{{ $jumlah_transaksi }}</p>
                       {{-- <p>10.00% (30 days)</p> --}}
                       <p>transaksi</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body text-center">
-                      <p class="mb-4">Laba Rugi</p>
-                      <p class="fs-30 mb-3">34040</p>
-                      <p>2.00% (30 days)</p>
                     </div>
                   </div>
                 </div>
@@ -117,11 +108,12 @@
                       </div>
                      </div>
                   </div>
-                  <canvas id="order-chart" width="702" height="350" style="display: block; height: 319px; width: 639px;" class="chartjs-render-monitor"></canvas>
+                  {{-- <canvas id="order-chart" width="702" height="350" style="display: block; height: 319px; width: 639px;" class="chartjs-render-monitor"></canvas> --}}
+                  <canvas id="areaChart" width="326" height="162" style="display: block; height: 148px; width: 297px;" class="chartjs-render-monitor"></canvas>
+                  {{-- <canvas id="doughnutChart" width="326" height="162" style="display: block; height: 148px; width: 297px;" class="chartjs-render-monitor"></canvas> --}}
                 </div>
               </div>
 
-              {{-- Top 5 Penjualan --}}
               {{-- <div class="card">
                 <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                   <h4 class="card-title">Area chart</h4>
@@ -130,6 +122,7 @@
               </div> --}}
             </div>
 
+            {{-- Top 5 Penjualan --}}
             <div class="col-md-4 stretch-card grid-margin">
               <div class="card">
                 <div class="card-body m-2">
@@ -227,6 +220,32 @@
                 </div>
               </div>
             </div>
+
+            {{-- Harga Kurang dari 5rb --}}
+            <div class="col-md-6 stretch-card grid-margin">
+              <div class="card">
+                <div class="card-body m-2">
+                  <div class="d-flex justify-content-between align-item-center mb-2">
+                    <p class="card-title">Harga Kurang Dari 5rb</p>
+                    <a href="">Lihat Detail</a>
+                  </div>
+                  <ul class="icon-data-list" style="width: 100%;">
+                    @foreach ($menu as $item)
+                      <li class="">
+                        <div class="d-flex">
+                          <img src="{{ asset('storage/' . $item->image) }}" alt="user">
+                          <div>
+                            <p class="font-weight-bold m-0">{{ $item->nama }}</p>
+                            {{-- <p class="mb-0">{{ $item->deskripsi }}</p> --}}
+                            <small>Rp{{ number_format($item->harga, 0, ',', '.') }}</small>
+                          </div>
+                        </div>
+                      </li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -239,7 +258,16 @@
     <!-- main-panel ends -->
 @endsection
 
+
 {{-- Script --}}
 @push('script')
-    
+<script>
+  @if ($pendapatan && $waktu)
+    let pendapatan = @json($pendapatan);
+    let waktu = @json($waktu);
+  @endif
+
+  // let pendapatan = pendapatann.map(value => 'Rp' + value);
+  // console.log(pendapatann.map(value => 'Rp' + value));
+</script>
 @endpush

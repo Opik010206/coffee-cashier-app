@@ -4,7 +4,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nama Karyawan</th>
 
-        @if (Auth::check() && Auth::user()->level == 3)
+        @if (Auth::check() && Auth::user()->level == 3 || Auth::user()->level == 1)
         <th scope="col">Status</th>
         @endif
 
@@ -28,7 +28,7 @@
                 <td>{{ $i = (!isset($i)?1:++$i) }}</td>
                 <td class="py-1">{{ $c->karyawan->nama }}</td>
 
-                @if (Auth::check() && Auth::user()->level == 3)
+                @if (Auth::check() && Auth::user()->level == 3 || Auth::user()->level == 1)
                 <td class="py-1">
                     @if($c->status == 'sakit')
                         <label class="badge badge-warning py-2 px-3">Sakit</label>
@@ -76,7 +76,7 @@
                     @endif
                 @endif
 
-                @if (Auth::check() && Auth::user()->level == 3)
+                @if (Auth::check() && Auth::user()->level == 3 || Auth::user()->level == 1)
                     @if($c->status == 'masuk')
                         @if ($c->waktu_keluar == null)
                             <td class="py-1 text-info">Belum Kelar</td>

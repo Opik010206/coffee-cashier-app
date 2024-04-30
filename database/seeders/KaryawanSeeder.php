@@ -65,5 +65,18 @@ class KaryawanSeeder extends Seeder
             'alamat' => 'Jl.Gunteng No.032',
             'foto' => 'karyawan/Leonardo.jpg',
         ]);
+        Karyawan::create([
+            'nip' => '536433265657',
+            'nik' => '773421313554',
+            'nama' => 'Yanti Febrianti',
+            'jenis_kelamin' => 'wanita',
+            'tempat_lahir' => 'Cianjur',
+            'tanggal_lahir' => '2006-02-07',
+            'no_telp' => '082347659320',
+            'agama' => 'Islam',
+            'status_nikah' => 'belum_nikah',
+            'alamat' => 'Jl.Gombong No.032',
+            'foto' => 'karyawan/A.jpg',
+        ]);
     }
 }

@@ -112,7 +112,7 @@ class MenuController extends Controller
 
     public function export() 
     {
-        $date = now()->format('j-M-Y-s');
+        $date = now()->format('j-M-Y');
         return Excel::download(new MenuExport, $date. '_Menu.xlsx');
     }
 
