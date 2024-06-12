@@ -7,7 +7,9 @@
           {{ $j->nama }}
         </a> --}}
 
-        <button c
+        <button class="jenis-button btn btn-outline-primary btn-sm" data-id="{{ $j->id }}" data-menu="{{ $j->menu }}">
+          {{ $j->nama }}
+        </button>
         
 
       @endforeach
