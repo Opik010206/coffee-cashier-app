@@ -29,7 +29,7 @@
               <div class="brand-logo">
                 <img src="{{ asset('assets') }}/images/logo2.svg" alt="logo">
               </div>
-              <h4>Hello! let's get started</h4>
+              <h4>Hallo! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>
               <form class="pt-3" action="{{ route('cekLogin') }}" method="post" novalidate>
                 @csrf
