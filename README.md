@@ -1,6 +1,8 @@
 
 # Coffee Cashier: Aplikasi Kasir Multifungsi untuk Usaha Kuliner
 
+![Alt text](./public/Coffe-cashier.jpg)
+
 ### Apa itu Coffee Cashier?
 **Coffee Cashier** adalah aplikasi kasir berbasis Laravel yang dirancang untuk mempermudah pengelolaan bisnis kuliner, terutama untuk kedai kopi. Aplikasi ini tidak hanya terbatas pada produk kopi, tetapi dapat digunakan untuk mengelola berbagai jenis produk kuliner seperti makanan berat, ringan, hingga produk titipan pihak ketiga.
 
